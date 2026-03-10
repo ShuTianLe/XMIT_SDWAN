@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>__PROJECT_NAME__</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+
+    <div class="shell reveal reveal-1">
+      <header class="masthead">
+        <p class="kicker">方案页</p>
+        <div class="masthead-meta">
+          <div>
+            <p class="meta-label">项目</p>
+            <h1>__PROJECT_NAME__</h1>
+          </div>
+          <div class="meta-pair">
+            <div>
+              <p class="meta-label">状态</p>
+              <p class="meta-value">待评审</p>
+            </div>
+            <div>
+              <p class="meta-label">时间</p>
+              <p class="meta-value mono" id="live-time">09:42</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="editorial-grid">
+        <section class="statement reveal reveal-2">
+          <p class="section-label">核心命题</p>
+          <div class="statement-grid">
+            <div class="statement-headline">
+              <h2>__PROJECT_TAGLINE__</h2>
+            </div>
+            <dl class="fact-list">
+              <div>
+                <dt>主要用户</dt>
+                <dd>待补充</dd>
+              </div>
+              <div>
+                <dt>核心动作</dt>
+                <dd>待补充</dd>
+              </div>
+              <div>
+                <dt>关键状态</dt>
+                <dd>默认 / 风险 / 完成</dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="brief-rail reveal reveal-3">
+          <div class="rail-block">
+            <p class="section-label">信息层级</p>
+            <ul>
+              <li>主动作</li>
+              <li>证据区</li>
+              <li>反馈区</li>
+            </ul>
+          </div>
+          <div class="rail-block">
+            <p class="section-label">评审重点</p>
+            <ul>
+              <li>任务是否清晰</li>
+              <li>风险是否可见</li>
+              <li>结果是否闭环</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="main-stage reveal reveal-4">
+          <div class="stage-header">
+            <div>
+              <p class="section-label">关键流程</p>
+              <h3>把真正发生决策的部分放在页面中心</h3>
+            </div>
+            <nav class="stage-switcher" aria-label="页面视图">
+              <button class="stage-tab is-active" data-tab="overview" type="button">概览</button>
+              <button class="stage-tab" data-tab="states" type="button">状态</button>
+              <button class="stage-tab" data-tab="flow" type="button">流程</button>
+            </nav>
+          </div>
+
+          <article class="stage-panel is-active" data-panel="overview">
+            <div class="stage-panel-grid">
+              <div class="panel-column">
+                <p class="panel-kicker">主操作区</p>
+                <h4>把最重要的动作放在第一眼</h4>
+                <ul class="panel-list">
+                  <li>范围切换</li>
+                  <li>优先级排序</li>
+                  <li>主操作入口</li>
+                </ul>
+              </div>
+              <div class="panel-column">
+                <p class="panel-kicker">证据区</p>
+                <h4>让判断依据贴着动作出现</h4>
+                <ul class="panel-list">
+                  <li>关键指标</li>
+                  <li>历史记录</li>
+                  <li>风险提示</li>
+                </ul>
+              </div>
+              <div class="panel-column accent-column">
+                <p class="panel-kicker">反馈区</p>
+                <h4>动作之后必须有结果回声</h4>
+                <ul class="panel-list">
+                  <li>状态变化</li>
+                  <li>负责人更新</li>
+                  <li>下一步动作</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="stage-panel" data-panel="states">
+            <div class="ledger">
+              <div class="ledger-row">
+                <span class="ledger-key">空状态</span>
+                <div>
+                  <strong>先给方向，不给空白</strong>
+                  <p>入口指引 / 示例数据 / 推荐下一步</p>
+                </div>
+              </div>
+              <div class="ledger-row">
+                <span class="ledger-key">风险态</span>
+                <div>
+                  <strong>优先级、影响面、负责人同时可见</strong>
+                  <p>不要只给红色提醒，要给处理路径</p>
+                </div>
+              </div>
+              <div class="ledger-row">
+                <span class="ledger-key">完成态</span>
+                <div>
+                  <strong>结果、归属、后续动作一次讲清</strong>
+                  <p>确认不是终点，闭环才是终点</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="stage-panel" data-panel="flow">
+            <ol class="flowline">
+              <li>
+                <span class="mono">01</span>
+                <div>
+                  <strong>识别</strong>
+                  <p>先知道当前要处理什么，以及为什么现在处理。</p>
+                </div>
+              </li>
+              <li>
+                <span class="mono">02</span>
+                <div>
+                  <strong>判断</strong>
+                  <p>把证据、影响和风险放到一个视线范围内。</p>
+                </div>
+              </li>
+              <li>
+                <span class="mono">03</span>
+                <div>
+                  <strong>执行</strong>
+                  <p>主动作必须清晰，次动作必须收敛。</p>
+                </div>
+              </li>
+              <li>
+                <span class="mono">04</span>
+                <div>
+                  <strong>确认</strong>
+                  <p>执行后发生了什么，谁接手，下一步去哪。</p>
+                </div>
+              </li>
+            </ol>
+          </article>
+        </section>
+
+        <section class="closing-note reveal reveal-5">
+          <div>
+            <p class="section-label">交付标准</p>
+            <h3>这页即使被截成一张图，也要能讲清楚产品逻辑。</h3>
+          </div>
+          <ul>
+            <li>替换掉所有“待补充”字段</li>
+            <li>确保主动作和关键状态同时成立</li>
+            <li>让页面里的字都像真实产品界面</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

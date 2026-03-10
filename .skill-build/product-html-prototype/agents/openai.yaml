@@ -1,0 +1,4 @@
+interface:
+  display_name: "Product HTML Prototype"
+  short_description: "Turn product requirements into polished HTML prototypes"
+  default_prompt: "Use $product-html-prototype to turn this product brief into a polished static HTML prototype with a strong, non-generic visual direction; explain the chosen style in 2-3 sentences first, then output runnable code."

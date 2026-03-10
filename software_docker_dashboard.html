@@ -14,10 +14,10 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#40a9ff;box-sh
 button{cursor:pointer;min-height:34px}
 button:hover{border-color:#40a9ff;color:#1890ff}
 button:disabled{cursor:not-allowed;color:#bfbfbf;background:#fafafa;border-color:#e5e5e5}
-#runCheck,#byNew,#pxNew,#setSave{background:var(--blue);border-color:var(--blue);color:#fff}
-#runCheck:hover,#byNew:hover,#pxNew:hover,#setSave:hover{background:#40a9ff;border-color:#40a9ff;color:#fff}
-#topRestart,#ctRestart{border-color:#ffccc7;background:#fff2f0;color:#cf1322}
-#topRestart:hover,#ctRestart:hover{border-color:#ff7875;color:#cf1322}
+#setSave{background:var(--blue);border-color:var(--blue);color:#fff}
+#setSave:hover{background:#40a9ff;border-color:#40a9ff;color:#fff}
+#topRestart{border-color:#ffccc7;background:#fff2f0;color:#cf1322}
+#topRestart:hover{border-color:#ff7875;color:#cf1322}
 .hidden{display:none!important}
 .login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(1200px 500px at 20% -10%,#263b63 0%,#151b2a 44%,#0f1320 100%);position:relative;overflow:hidden}
 .login-page:before,.login-page:after{content:"";position:absolute;border-radius:50%;filter:blur(0);opacity:.35;pointer-events:none}
@@ -80,17 +80,10 @@ button:disabled{cursor:not-allowed;color:#bfbfbf;background:#fafafa;border-color
 .metric-row .bar i{display:block;height:100%;width:0;background:#52c41a;border-radius:100px}
 .metric-row.mem .bar i{background:#faad14}
 .metric-row .val{flex-shrink:0;color:rgba(0,0,0,.65);font-weight:400;font-size:12px;white-space:nowrap}
-.ov-metrics .metric-pair{flex-wrap:nowrap}
 .m{border:1px solid var(--line);background:#fff;border-radius:4px;padding:10px}
 .m .k{font-size:12px;color:#8c8c8c}
 .m .v{font-size:22px;font-weight:600;color:#262626}
 .m .s{font-size:12px;color:#8c8c8c}
-.metric-pair{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.metric-item{display:inline-flex;align-items:center;gap:6px}
-.metric-icon{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:4px;border:1px solid #d6e4ff;background:#f0f5ff;color:#2f54eb}
-.metric-icon.mem{border-color:#ffd591;background:#fff7e6;color:#d48806}
-.metric-icon svg{width:14px;height:14px;display:block}
-.metric-split{font-size:18px;font-weight:500;color:#8c8c8c;padding:0 2px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .mini{border:1px solid var(--line);background:#fff;border-radius:4px;padding:10px}
 .mini h4{margin:0 0 8px;font-size:13px;color:#262626}
@@ -98,10 +91,7 @@ canvas{width:100%;height:168px;display:block}
 .ov-online{padding:11px 10px 15px}
 .ov-online .ttl{margin-bottom:6px}
 .ov-online canvas{height:56px}
-.ov-traffic canvas{height:150px}
-.traffic-wrap{position:relative}
 .online-wrap{position:relative}
-.resource-wrap{position:relative}
 .online-tip{position:absolute;display:none;pointer-events:none;z-index:3;background:#fff;border:1px solid #e8e8e8;border-radius:4px;padding:8px 10px;min-width:160px;box-shadow:0 6px 16px rgba(0,0,0,.12)}
 .online-tip.show{display:block}
 .online-tip .t1{font-size:12px;color:#8c8c8c;margin-bottom:4px}
@@ -135,11 +125,6 @@ canvas{width:100%;height:168px;display:block}
 .kv div{display:flex;gap:6px}
 .kv b{min-width:108px;color:#8c8c8c;font-size:12px;font-weight:500}
 .kv span{color:#262626;font-size:13px;word-break:break-all}
-.copy-inline{display:inline-flex;align-items:center;gap:8px;max-width:100%}
-.copy-inline .copy-val{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.copy-inline .copy-hover{opacity:0;visibility:hidden;color:#1677ff;font-size:12px;line-height:18px;cursor:pointer;transition:all .16s}
-.copy-inline:hover .copy-hover{opacity:1;visibility:visible}
-.copy-inline .copy-hover:hover{text-decoration:underline}
 .list{margin:0;padding-left:18px}
 .list li{margin:4px 0}
 .block{background:#fff;border:1px solid var(--line);border-radius:4px;padding:12px}
@@ -215,7 +200,6 @@ canvas{width:100%;height:168px;display:block}
 .confirm-icon.danger{border-color:#ffccc7;background:#fff2f0;color:#cf1322}
 .confirm-text{color:#262626;font-size:14px;line-height:22px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.pre{background:#fafafa;border:1px solid var(--line);border-radius:4px;padding:10px;white-space:pre-wrap;font:12px/1.45 Menlo,Consolas,monospace;max-height:48vh;overflow:auto}
 .toasts{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:8px;z-index:40}
 .toast{min-width:210px;max-width:420px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--ok);border-radius:4px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
 .toast.err{border-left-color:var(--err)}
@@ -294,51 +278,6 @@ canvas{width:100%;height:168px;display:block}
     <div class="kv" id="connInfo"></div>
   </div>
 </section>
-<section class="page" id="p-bypass">
-  <div class="card">
-    <div class="ttl"><h2>旁路接入</h2></div>
-    <p class="desc">把 vCPE 所在内网的网段或单个设备接入组网，供指定对象访问。</p>
-    <div class="row" style="margin:8px 0">
-      <input id="bySearch" placeholder="搜索规则名/目标地址" />
-      <select id="bySt"><option value="all">全部状态</option><option value="enabled">启用</option><option value="disabled">停用</option></select>
-      <select id="byTp"><option value="all">全部目标类型</option><option value="网段">网段</option><option value="单IP">单IP</option></select>
-      <button id="byNew">新建规则</button>
-    </div>
-    <table class="table"><thead><tr>
-      <th class="sort" data-t="by" data-k="name" style="width:126px">规则名称</th>
-      <th class="sort" data-t="by" data-k="targetType" style="width:86px">目标类型</th>
-      <th class="sort" data-t="by" data-k="targetAddress" style="width:134px">目标地址</th>
-      <th class="sort" data-t="by" data-k="status" style="width:78px">状态</th>
-      <th style="width:120px">最近失败原因</th>
-      <th class="sort" data-t="by" data-k="updatedAt" style="width:145px">更新时间</th>
-      <th style="width:210px">操作</th>
-    </tr></thead><tbody id="byBody"></tbody></table>
-    <div class="pg"><button id="byPrev">上一页</button><span id="byPg"></span><button id="byNext">下一页</button></div>
-  </div>
-</section>
-<section class="page" id="p-proxy">
-  <div class="card">
-    <div class="ttl"><h2>资源代理</h2></div>
-    <p class="desc">按端口把内网服务提供给指定对象使用，不开放整段内网。</p>
-    <div class="row" style="margin:8px 0">
-      <input id="pxSearch" placeholder="搜索代理名/目标IP" />
-      <select id="pxSt"><option value="all">全部状态</option><option value="enabled">启用</option><option value="disabled">停用</option></select>
-      <select id="pxHl"><option value="all">全部健康状态</option><option value="正常">正常</option><option value="上游不可达">上游不可达</option><option value="端口冲突">端口冲突</option></select>
-      <button id="pxNew">新建代理</button>
-    </div>
-    <table class="table"><thead><tr>
-      <th class="sort" data-t="px" data-k="name" style="width:126px">代理名称</th>
-      <th class="sort" data-t="px" data-k="externalPort" style="width:82px">对外端口</th>
-      <th style="width:130px">内网目标</th>
-      <th style="width:64px">协议</th>
-      <th class="sort" data-t="px" data-k="status" style="width:78px">状态</th>
-      <th class="sort" data-t="px" data-k="health" style="width:98px">健康状态</th>
-      <th class="sort" data-t="px" data-k="updatedAt" style="width:145px">更新时间</th>
-      <th style="width:224px">操作</th>
-    </tr></thead><tbody id="pxBody"></tbody></table>
-    <div class="pg"><button id="pxPrev">上一页</button><span id="pxPg"></span><button id="pxNext">下一页</button></div>
-  </div>
-</section>
 <section class="page" id="p-members">
   <div class="card">
     <div class="ttl"><h2>成员管理</h2></div>
@@ -348,9 +287,9 @@ canvas{width:100%;height:168px;display:block}
       <select id="mbSt"><option value="all">全部连接状态</option><option value="online">在线</option><option value="offline">离线</option></select>
     </div>
     <table class="table"><thead><tr>
-      <th class="sort" data-t="mb" data-k="account" style="width:138px">账户</th>
-      <th class="sort" data-t="mb" data-k="name" style="width:110px">姓名</th>
-      <th class="sort" data-t="mb" data-k="bandwidth" style="width:98px">带宽限制</th>
+      <th style="width:138px">账户</th>
+      <th style="width:110px">姓名</th>
+      <th style="width:98px">带宽限制</th>
       <th class="sort" data-t="mb" data-k="conn" style="width:96px">连接状态</th>
       <th class="sort" data-t="mb" data-k="lat" style="width:92px">延时</th>
       <th class="sort" data-t="mb" data-k="loss" style="width:86px">丢包</th>
@@ -359,41 +298,11 @@ canvas{width:100%;height:168px;display:block}
     <div class="pg"><button id="mbPrev">上一页</button><span id="mbPg"></span><button id="mbNext">下一页</button></div>
   </div>
 </section>
-<section class="page" id="p-container">
-  <div class="card">
-    <div class="ttl"><h2>容器与宿主</h2></div>
-    <div class="grid2">
-      <div class="block">
-        <h3 style="margin:0 0 8px;font-size:14px">容器信息</h3>
-        <div class="kv" id="ctInfo"></div>
-        <h4 style="margin:10px 0 6px">端口映射</h4>
-        <table class="table"><thead><tr><th style="width:90px">宿主端口</th><th style="width:90px">容器端口</th><th>用途</th></tr></thead><tbody id="pmBody"></tbody></table>
-        <h4 style="margin:10px 0 6px">挂载卷</h4>
-        <table class="table"><thead><tr><th style="width:155px">宿主路径</th><th style="width:155px">容器路径</th><th>用途</th></tr></thead><tbody id="mtBody"></tbody></table>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="ttl"><h3>宿主网络信息</h3></div>
-    <div class="kv" id="hostInfo"></div>
-    <h4 style="margin:10px 0 6px">网卡列表</h4>
-    <table class="table"><thead><tr><th style="width:90px">名称</th><th style="width:180px">IP</th><th style="width:140px">网关</th><th>DNS</th></tr></thead><tbody id="ifBody"></tbody></table>
-    <h4 style="margin:10px 0 6px">路由摘要</h4><ul class="list" id="rtList"></ul>
-  </div>
-  <div class="card">
-    <div class="ttl"><h3>容器运维动作</h3></div>
-    <div class="row">
-      <button id="ctRestart">重启容器</button>
-      <button id="ctExportLog">导出容器日志</button>
-      <button id="ctExportDiag">导出诊断包</button>
-    </div>
-  </div>
-</section>
 <section class="page" id="p-logs">
   <div class="card">
     <div class="ttl"><h2>日志</h2></div>
     <div class="row" style="margin-bottom:8px">
-      <select id="logType"><option value="all">全部日志类型</option><option>系统日志</option><option>连接日志</option><option>旁路日志</option><option>代理日志</option><option>容器日志</option></select>
+      <select id="logType"><option value="all">全部日志类型</option><option>系统日志</option><option>连接日志</option><option>容器日志</option></select>
       <input id="logKw" placeholder="关键字搜索" class="grow" />
     </div>
     <table class="table"><thead><tr><th class="sort" data-t="lg" data-k="time" style="width:190px">时间</th><th class="sort" data-t="lg" data-k="type" style="width:110px">日志类型</th><th class="sort" data-t="lg" data-k="level" style="width:90px">级别</th><th>内容</th></tr></thead><tbody id="lgBody"></tbody></table>
@@ -409,10 +318,6 @@ canvas{width:100%;height:168px;display:block}
         <div class="f form-row">
           <label>设备名称</label>
           <div class="ctl"><input id="setName" /></div>
-        </div>
-        <div class="f form-row">
-          <label>时区</label>
-          <div class="ctl"><select id="setTz"><option>Asia/Shanghai</option><option>Asia/Hong_Kong</option><option>Asia/Tokyo</option><option>UTC</option></select></div>
         </div>
         <div class="f form-row">
           <label>语言</label>
@@ -466,25 +371,19 @@ canvas{width:100%;height:168px;display:block}
 <script>
 const S={
 deviceInfo:{name:"vCPE-上海-现场01",status:"online",heartbeat:"2026-03-04 15:18:22",network:"华东生产网",nodeId:"NODE-SH-7A91",vAddr:"10.200.18.34",scope:"总部运维组、华东应用组、生产控制组",ver:"vCPE 2.8.4 / 策略包 2026.03.04.1",tenant:"上海制造租户",enterprise:"朗桥维视通信技术有限公司",siteName:"广州研发中心",siteAddress:"广州市越秀区朗桥维视通信技术有限公司",bind:"BND-3F29",netMode:"加速+组网"},
-conn:{type:"中转",lat:32,loss:0.4,jitter:8,downs:["上游链路抖动，切换兜底","DNS 解析超时","上级平台短时不可达","宿主机网卡重协商","端口被占用触发重连","网络波动导致会话中断","策略切换触发重连","宿主时间偏差过大","上游服务响应超时","链路拥塞触发重试"]},
-docker:{id:"3f4a0be7c19d4fa5a912eb1f2dc8a771",name:"vcpe-edge-agent",img:"registry.local/vcpe-agent",ver:"2.8.4",pull:"2026-03-03 22:10:06",start:"2026-03-04 08:12:00",up:"7小时12分",policy:"always",ports:[[8080,8080,"本机管理面板"],[18080,18080,"资源代理入口（对外端口以代理规则为准）"],[19001,19001,"本机健康检查接口"]],mounts:[["/opt/vcpe/conf","/app/conf","配置目录"],["/opt/vcpe/logs","/app/logs","日志目录"],["/opt/vcpe/data","/app/data","运行数据"]],limit:{cpu:"2 核",mem:"2048 MB"}},
-host:{name:"edge-host-sh01",os:"Ubuntu 22.04.4 LTS",kernel:"5.15.0-102-generic",dns:"223.5.5.5,119.29.29.29",ifs:[{n:"eth0",ip:"192.168.10.12/24",gw:"192.168.10.1",dns:"223.5.5.5,119.29.29.29"},{n:"eth1",ip:"10.20.30.12/24",gw:"10.20.30.1",dns:"8.8.8.8"},{n:"docker0",ip:"172.17.0.1/16",gw:"-",dns:"-"}],routes:["0.0.0.0/0 -> 192.168.10.1 (eth0)","10.200.0.0/16 -> 10.20.30.1 (eth1)","172.17.0.0/16 -> docker0","192.168.10.0/24 -> eth0"]},
-set:{tz:"Asia/Shanghai",login:true,lan:true,white:"192.168.10.0/24\n10.20.30.0/24",panelPwd:"Admin@123"},
-chart:{on:[100,100,100,99,98,97,100,100,99,100,100,100,99,98,96,98,99,100,100,100,99,98,100,100],tf:[12,40,10,38,8,35,9,33,7,30,8,32,14,46,18,54,20,58,21,62,19,60,18,55,17,52,15,49,14,45,16,47,18,53,19,57,17,56,16,51,14,48,13,44,12,42,11,40],cpu:[36,42,40,47,53,49,45,48,46,44,52,50],mem:[58,57,59,60,62,61,60,63,62,61,60,59],cpu1:[31,34,36,33,39,41,38,44,46,42,40,43],mem1:[55,56,56,57,58,59,58,60,61,60,59,60]},
-recent:["策略配置下发完成","旁路规则「访客设备接入」已停用","代理目标 10.1.3.8:443 上游不可达","容器发生一次自动重启","网络波动，连接切换到中转","规则命中统计已刷新","上级平台下发代理规则更新","日志轮转完成","检测到宿主端口冲突","连通性自检通过"]
+conn:{type:"中转",lat:32,loss:0.4,jitter:8},
+resource:{cpu:"2 核",mem:"2048 MB"},
+set:{panelPwd:"Admin@123"},
+chart:{on:[100,100,100,99,98,97,100,100,99,100,100,100,99,98,96,98,99,100,100,100,99,98,100,100],cpu:[36,42,40,47,53,49,45,48,46,44,52,50],mem:[58,57,59,60,62,61,60,63,62,61,60,59]}
 };
 const mkTime=(i)=>{const b=new Date("2026-03-03T00:00:00").getTime()+i*8*6e4,d=new Date(b),p=n=>String(n).padStart(2,"0");return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`};
-S.bypass=Array.from({length:12},(_,i)=>({id:i+1,name:["生产网段接入","财务系统单点","仓库扫码终端","视频巡检区域","开发调试主机","访客办公隔离","PLC 控制层","门禁控制器","打印服务段","质检工位","边缘缓存节点","旧系统迁移"][i],targetType:i%3?"网段":"单IP",targetAddress:i%3?`10.${10+i}.0.0/24`:`10.55.40.${i+5}`,status:i%4?"enabled":"disabled",hitCount:Math.max(0,1800-i*130),failReason:i%4?"-":(i%2?"策略冲突":"上游不可达"),updatedAt:mkTime(180-i*6),note:"业务规则"}));
-S.proxy=Array.from({length:12},(_,i)=>({id:100+i,name:["ERP-HTTPS","MES-API","报表服务","设备心跳","测试代理A","视频回放","打印服务","缓存节点","SQL 查询","文件服务","旧系统接口","调度中心"][i],externalPort:18000+i*7,targetIp:`10.1.${3+i}.${8+i}`,targetPort:[443,8081,8090,7001,22,9080,9100,6379,3306,445,8111,8200][i],protocol:"TCP",status:i%5?"enabled":"disabled",connCount:Math.max(0,1500-i*120),health:i%6===0?"上游不可达":i%5===0?"端口冲突":"正常",updatedAt:mkTime(150-i*4),note:"业务代理"}));
 S.members=Array.from({length:18},(_,i)=>({id:500+i,account:`13${String(640000000+i*173).slice(0,9)}`,name:["张晨","李萌","王一鸣","赵可","陈宇","周婷","吴昊","郑雪","冯涛","蒋琳","郭凯","彭娜","谢宁","唐杰","邓玥","韩超","宋磊","许静"][i],bandwidth:[20,30,50,100,80,40,60,50,30,100,20,60,80,40,50,30,60,100][i],conn:i%4===0?"offline":"online",lat:12+(i*7%63),loss:((i*3)%9/10).toFixed(1),jitter:3+(i*5%20)}));
-const T=["系统日志","连接日志","旁路日志","代理日志","容器日志"],M={系统日志:["系统服务","任务调度","配置模块"],连接日志:["连接管理","链路探测","心跳模块"],旁路日志:["旁路引擎","路由匹配","策略检查"],代理日志:["代理入口","会话管理","端口监听"],容器日志:["容器运行","镜像管理","资源监控"]},
-CI={系统日志:["配置已应用","本机任务扫描完成","配置文件校验通过"],连接日志:["平台可达保持连接","直连质量恢复正常","心跳恢复更新在线"],旁路日志:["规则命中成功","旁路策略重载完成","目标路由学习完成"],代理日志:["代理连接建立成功","监听端口检查通过","连接会话已关闭"],容器日志:["容器资源采样完成","镜像版本检查完成","容器健康检查通过"]},
-CW={系统日志:["系统时间存在轻微偏差","日志目录空间接近阈值","检测到短时负载波动"],连接日志:["链路延迟升高，已启用兜底","DNS 解析耗时偏高","丢包波动超过预警阈值"],旁路日志:["规则匹配命中率下降","检测到重复网段，已跳过生效","目标地址响应偏慢"],代理日志:["上游响应慢，正在重试","目标服务间歇超时","连接重试次数增加"],容器日志:["容器内存接近限制","容器重启次数增加","容器健康探测存在抖动"]},
-CE={系统日志:["配置加载失败","关键进程异常退出","系统服务启动失败"],连接日志:["上级平台不可达","链路握手失败","持续丢包导致连接中断"],旁路日志:["旁路规则下发失败","目标路由冲突导致规则失效","地址解析失败，规则未生效"],代理日志:["监听端口被占用","上游连接失败且重试耗尽","代理握手失败，连接被拒绝"],容器日志:["容器启动失败","镜像拉取失败","容器健康检查连续失败"]};
-S.logs=Array.from({length:36},(_,i)=>{const t=T[i%5],l=i%14===0?"ERROR":i%5===0?"WARN":"INFO",pool=l==="ERROR"?CE:l==="WARN"?CW:CI;return{id:i+1,time:mkTime(420-i),type:t,level:l,module:M[t][i%3],content:pool[t][i%pool[t].length]}});
-const L=["高","中","低"],AT=["连接","配置","代理","旁路","容器","系统"],AD=["上游不可达，已切换兜底链路","配置下发后存在待确认变更","检测到端口冲突，代理启动失败","旁路目标地址格式异常","容器重启次数上升","网络抖动超过阈值","资源占用接近限制","DNS 查询超时"],AS=["未处理","已确认","已关闭"];
-S.alerts=Array.from({length:24},(_,i)=>({id:300+i,time:mkTime(230-i*2),level:i%7===0?"高":i%3===0?"中":"低",type:AT[i%AT.length],desc:AD[i%AD.length],status:i%5===0?"已关闭":i%2===0?"已确认":"未处理"}));
-const U={p:"overview",by:{q:"",st:"all",tp:"all",s:"updatedAt",d:"desc",pg:1,ps:6},px:{q:"",st:"all",hl:"all",s:"updatedAt",d:"desc",pg:1,ps:6},mb:{q:"",st:"all",s:"account",d:"asc",pg:1,ps:8},lg:{tp:"all",q:"",s:"time",d:"desc",pg:1,ps:20},al:{lv:"all",st:"all",q:"",s:"time",d:"desc",pg:1,ps:8,sel:new Set()},check:[],online:{bars:[]},traffic:{m:[],times:[],pad:null,aw:0,w:0,h:0},cpuChart:{pts:[],pad:null,w:0,h:0,aw:0},ramChart:{pts:[],pad:null,w:0,h:0,aw:0,total:0},resRange:24};
+const T=["系统日志","连接日志","容器日志"],
+CI={系统日志:["配置已应用","本机任务扫描完成"],连接日志:["平台可达保持连接","心跳恢复正常"],容器日志:["容器资源采样完成"]},
+CW={系统日志:["系统时间存在轻微偏差","检测到短时负载波动"],连接日志:["链路延迟升高已启用兜底","丢包波动超过预警阈值"],容器日志:["容器内存接近限制"]},
+CE={系统日志:["配置加载失败","关键进程异常退出"],连接日志:["上级平台不可达","链路握手失败"],容器日志:["容器启动失败"]};
+S.logs=Array.from({length:24},(_,i)=>{const t=T[i%3],l=i%10===0?"ERROR":i%4===0?"WARN":"INFO",pool=l==="ERROR"?CE:l==="WARN"?CW:CI;return{id:i+1,time:mkTime(420-i),type:t,level:l,content:pool[t][i%pool[t].length]}});
+const U={p:"overview",mb:{q:"",st:"all",s:"",d:"asc",pg:1,ps:8},lg:{tp:"all",q:"",s:"time",d:"desc",pg:1,ps:20},online:{bars:[]}};
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m])),sts=s=>s==="online"?"在线":s==="offline"?"离线":"异常",now=()=>{const d=new Date(),p=n=>String(n).padStart(2,"0");return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`};
 const md={box:$("#md"),t:$("#mdT"),b:$("#mdB"),a:$("#mdA"),x:$("#mdX"),maskClosable:true,escClosable:true};
 const AUTH={key:"vcpe_local_auth"};
@@ -503,69 +402,32 @@ acts.slice(0,3).forEach(x=>{const bt=document.createElement("button");bt.textCon
 function closeM(){md.box.classList.remove("show");md.box.dataset.size="standard";md.maskClosable=true;md.escClosable=true}
 function confirmM(t,m,f,ok="确定"){const d=/删除|重启|回滚|关闭|移出|重置|停用/.test(`${t}${m}${ok}`),icon=d?"<span class='confirm-icon danger'>!</span>":"<span class='confirm-icon'>!</span>";openM(t,`<div class='confirm-box'>${icon}<div class='confirm-text'>${esc(m)}</div></div>`,[{t:"取消",c:"btn-default"},{t:ok,c:d?"btn-danger":"btn-primary",loading:true,f}],{size:"confirm"})}
 function toast(t,k=""){const d=document.createElement("div");d.className=`toast ${k}`;d.textContent=t;$("#ts").appendChild(d);setTimeout(()=>d.remove(),2500)}
-async function copyTxt(v){v=String(v||"");if(!v)return toast("没有可复制内容","warn");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(v);return toast("已复制到剪贴板")}}catch(e){}try{const ta=document.createElement("textarea");ta.value=v;document.body.appendChild(ta);ta.select();const ok=document.execCommand("copy");ta.remove();if(ok)return toast("已复制到剪贴板")}catch(e){}openM("复制失败，请手动复制",`<textarea style="width:100%;min-height:120px">${esc(v)}</textarea>`)}
-function dl(fn,txt){const h="data:text/plain;base64,"+btoa(unescape(encodeURIComponent(String(txt||""))));const a=document.createElement("a");a.href=h;a.download=fn;document.body.appendChild(a);a.click();a.remove();return h}
 function sv(v){if(v==null)return"";if(typeof v==="number")return v;if(/^\d{4}-\d{2}-\d{2}/.test(String(v))){const t=new Date(String(v).replace(/-/g,"/")).getTime();if(!Number.isNaN(t))return t}return String(v).toLowerCase()}
 function sortA(a,k,d){const f=d==="asc"?1:-1;return[...a].sort((x,y)=>sv(x[k])>sv(y[k])?f:sv(x[k])<sv(y[k])?-f:0)}
 function pageA(a,p,s){const n=Math.max(1,Math.ceil(a.length/s)),c=Math.min(Math.max(1,p),n),st=(c-1)*s;return{n,c,t:a.length,i:a.slice(st,st+s)}}
-function tgS(s){return `<span class="tag ${s==="enabled"?"on":"off"}">${s==="enabled"?"启用":"停用"}</span>`}
-function tgH(h){return `<span class="tag ${h==="正常"?"h-ok":h==="上游不可达"?"h-bad":"h-warn"}">${esc(h)}</span>`}
 function tgConn(s){return `<span class="bad status-${s}">${sts(s)}</span>`}
-function setSort(){ $$("th.sort").forEach(th=>{th.classList.remove("asc","desc");const t=th.dataset.t,k=th.dataset.k,o={by:U.by,px:U.px,mb:U.mb,lg:U.lg,al:U.al}[t];if(o&&o.s===k)th.classList.add(o.d==="asc"?"asc":"desc")}) }
+function setSort(){ $$("th.sort").forEach(th=>{th.classList.remove("asc","desc");const t=th.dataset.t,k=th.dataset.k,o={mb:U.mb,lg:U.lg}[t];if(o&&o.s===k)th.classList.add(o.d==="asc"?"asc":"desc")}) }
 function topR(){ $("#topName").textContent=S.deviceInfo.name;const st=$("#topStatus");st.textContent=sts(S.deviceInfo.status);st.className=`bad status-${S.deviceInfo.status}`;$("#topHb").textContent=S.deviceInfo.heartbeat }
 function draw(id,fn){const c=$(id);if(!c)return;const r=c.getBoundingClientRect(),d=window.devicePixelRatio||1;c.width=Math.max(1,Math.floor(r.width*d));c.height=Math.max(1,Math.floor(r.height*d));const x=c.getContext("2d");x.setTransform(d,0,0,d,0,0);fn(x,r.width,r.height)}
-function ax(x,w,h,b=24){x.strokeStyle="#dde6f5";x.beginPath();x.moveTo(30,10);x.lineTo(30,h-b);x.lineTo(w-10,h-b);x.stroke()}
-function ovR(){ $("#mMode").textContent=S.deviceInfo.netMode;$("#mQ").textContent=`${S.conn.lat} ms / ${S.conn.loss}%`;const cpuPct=S.chart.cpu.at(-1),memPct=S.chart.mem.at(-1),cpuCores=parseInt(S.docker.limit.cpu,10)||0,memTotal=parseInt(S.docker.limit.mem,10)||0,memUsed=Math.round(memTotal*memPct/100),cpuAvg=(S.chart.cpu1.reduce((a,b)=>a+b,0)/Math.max(1,S.chart.cpu1.length)).toFixed(1);$("#mCpu").className="v inline-bar";$("#mMem").className="v inline-bar";$("#mCpu").innerHTML=`<span class="metric-row"><span class="bar"><i style="width:${cpuPct}%"></i></span><span class="val">${cpuPct}%（平均 ${cpuAvg}%）</span></span>`;$("#mMem").innerHTML=`<span class="metric-row mem"><span class="bar"><i style="width:${memPct}%"></i></span><span class="val">${memUsed} MB / ${memTotal} MB</span></span>`;
+function ovR(){ $("#mMode").textContent=S.deviceInfo.netMode;$("#mQ").textContent=`${S.conn.lat} ms / ${S.conn.loss}%`;const cpuPct=S.chart.cpu.at(-1),memPct=S.chart.mem.at(-1),memTotal=parseInt(S.resource.mem,10)||0,memUsed=Math.round(memTotal*memPct/100),cpuAvg=(S.chart.cpu.reduce((a,b)=>a+b,0)/Math.max(1,S.chart.cpu.length)).toFixed(1);$("#mCpu").className="v inline-bar";$("#mMem").className="v inline-bar";$("#mCpu").innerHTML=`<span class="metric-row"><span class="bar"><i style="width:${cpuPct}%"></i></span><span class="val">${cpuPct}%（平均 ${cpuAvg}%）</span></span>`;$("#mMem").innerHTML=`<span class="metric-row mem"><span class="bar"><i style="width:${memPct}%"></i></span><span class="val">${memUsed} MB / ${memTotal} MB</span></span>`;
 draw("#cOnline",(x,w,h)=>{x.clearRect(0,0,w,h);const padL=12,padR=12,src=S.chart.on,d=[];src.forEach(v=>{d.push(v,v,v)});const n=d.length,total=w-padL-padR,gap=Math.max(2,Math.min(4,Math.floor(total/(n*3.1)))),bw=Math.max(3,(total-gap*(n-1))/n);const barY=14,barH=Math.max(10,Math.min(12,h-33)),axisY=barY+barH+5,labelY=Math.min(h-3,axisY+11);const rr=(x0,y0,ww,hh,r)=>{const r0=Math.min(r,ww/2,hh/2);x.beginPath();x.moveTo(x0+r0,y0);x.arcTo(x0+ww,y0,x0+ww,y0+hh,r0);x.arcTo(x0+ww,y0+hh,x0,y0+hh,r0);x.arcTo(x0,y0+hh,x0,y0,r0);x.arcTo(x0,y0,x0+ww,y0,r0);x.closePath()};const bars=[];const tm=i=>{const h0=Math.floor(i/3),m0=(i%3)*20,p=v=>String(v).padStart(2,"0");return `2026-03-03 ${p(h0)}:${p(m0)}`};for(let i=0;i<n;i++){const v=d[i],bx=padL+i*(bw+gap),c=v>=99?"#35b995":v>=97?"#f3b324":"#ef6a62";x.fillStyle=c;rr(bx,barY,bw,barH,Math.min(2,bw/2));x.fill();bars.push({x:bx,y:barY,w:bw,h:barH,v,tm:tm(i),c})}U.online={bars,w,h};x.strokeStyle="#e8e8e8";x.beginPath();x.moveTo(padL,axisY);x.lineTo(w-padR,axisY);x.stroke();const ticks=[0,18,36,54,n-1],labs=["00:00","06:00","12:00","18:00","24:00"];x.fillStyle="#8c8c8c";x.font="9px sans-serif";x.textAlign="center";ticks.forEach((idx,i)=>{const px=padL+idx*(bw+gap)+bw/2;x.fillRect(px,axisY+1,1,2);x.fillText(labs[i],px,labelY)});x.textAlign="start"}) }
-function connR(){const kv=(arr)=>arr.map(([k,v])=>`<div><b>${k}</b><span>${esc(v)}</span></div>`).join("");$("#connInfo").innerHTML=kv([["所属策略",S.deviceInfo.network],["所属企业",S.deviceInfo.enterprise],["所属站点",S.deviceInfo.siteName],["站点地址",S.deviceInfo.siteAddress],["虚拟地址（VIP）",S.deviceInfo.vAddr]]);checkR()}
-function checkR(){const b=$("#checkBody");if(!b)return;if(!U.check.length)return b.innerHTML=`<tr><td colspan="4" class="empty">尚未执行自检，点击“开始自检”。</td></tr>`;b.innerHTML=U.check.map((r,i)=>`<tr><td>${esc(r.i)}</td><td><span class="tag ${r.r==="通过"?"h-ok":r.r==="警告"?"h-warn":"h-bad"}">${r.r}</span></td><td>${esc(r.d)}</td><td><button class="sbtn" data-cpcheck="${i}">复制详情</button></td></tr>`).join("")}
-function byR(){ $("#byNew").disabled=false;let a=S.bypass.filter(r=>(!U.by.q||`${r.name}${r.targetAddress}`.toLowerCase().includes(U.by.q))&&(U.by.st==="all"||r.status===U.by.st)&&(U.by.tp==="all"||r.targetType===U.by.tp));a=sortA(a,U.by.s,U.by.d);const p=pageA(a,U.by.pg,U.by.ps);U.by.pg=p.c;const b=$("#byBody");if(!p.i.length)b.innerHTML=`<tr><td colspan="7"><div class="empty">当前筛选条件下没有数据<br><button class="sbtn" data-clear="by">清空筛选</button></div></td></tr>`;else b.innerHTML=p.i.map(r=>`<tr><td>${esc(r.name)}</td><td>${r.targetType}</td><td>${esc(r.targetAddress)}</td><td>${tgS(r.status)}</td><td>${esc(r.failReason)}</td><td>${esc(r.updatedAt)}</td><td><div class="op"><button class="sbtn" data-act="bv" data-id="${r.id}">查看</button><button class="sbtn" data-act="be" data-id="${r.id}">编辑</button><button class="sbtn ${r.status==="enabled"?"sbtn-warning":"sbtn-primary"}" data-act="bt" data-id="${r.id}">${r.status==="enabled"?"停用":"启用"}</button><button class="sbtn sbtn-danger" data-act="bd" data-id="${r.id}">删除</button></div></td></tr>`).join("");$("#byPg").textContent=`第 ${p.c}/${p.n} 页，共 ${p.t} 条`;$("#byPrev").disabled=p.c<=1;$("#byNext").disabled=p.c>=p.n;setSort() }
-function pxR(){ $("#pxNew").disabled=false;let a=S.proxy.filter(r=>(!U.px.q||`${r.name}${r.targetIp}`.toLowerCase().includes(U.px.q))&&(U.px.st==="all"||r.status===U.px.st)&&(U.px.hl==="all"||r.health===U.px.hl));a=sortA(a,U.px.s,U.px.d);const p=pageA(a,U.px.pg,U.px.ps);U.px.pg=p.c;const b=$("#pxBody");if(!p.i.length)b.innerHTML=`<tr><td colspan="8"><div class="empty">当前筛选条件下没有数据<br><button class="sbtn" data-clear="px">清空筛选</button></div></td></tr>`;else b.innerHTML=p.i.map(r=>`<tr><td>${esc(r.name)}</td><td>${r.externalPort}</td><td>${r.targetIp}:${r.targetPort}</td><td>TCP</td><td>${tgS(r.status)}</td><td>${tgH(r.health)}</td><td>${esc(r.updatedAt)}</td><td><div class="op"><button class="sbtn" data-act="pe" data-id="${r.id}">编辑</button><button class="sbtn ${r.status==="enabled"?"sbtn-warning":"sbtn-primary"}" data-act="pt" data-id="${r.id}">${r.status==="enabled"?"停用":"启用"}</button><button class="sbtn sbtn-danger" data-act="pd" data-id="${r.id}">删除</button><button class="sbtn" data-act="ptest" data-id="${r.id}">测试连通</button></div></td></tr>`).join("");$("#pxPg").textContent=`第 ${p.c}/${p.n} 页，共 ${p.t} 条`;$("#pxPrev").disabled=p.c<=1;$("#pxNext").disabled=p.c>=p.n;setSort() }
-function mbList(){let a=S.members.filter(r=>(!U.mb.q||`${r.account}${r.name}`.toLowerCase().includes(U.mb.q))&&(U.mb.st==="all"||r.conn===U.mb.st));return sortA(a,U.mb.s,U.mb.d)}
+function connR(){const kv=(arr)=>arr.map(([k,v])=>`<div><b>${k}</b><span>${esc(v)}</span></div>`).join("");$("#connInfo").innerHTML=kv([["所属策略",S.deviceInfo.network],["所属企业",S.deviceInfo.enterprise],["所属站点",S.deviceInfo.siteName],["站点地址",S.deviceInfo.siteAddress],["虚拟地址（VIP）",S.deviceInfo.vAddr]])}
+function mbList(){let a=S.members.filter(r=>(!U.mb.q||`${r.account}${r.name}`.toLowerCase().includes(U.mb.q))&&(U.mb.st==="all"||r.conn===U.mb.st));return U.mb.s?sortA(a,U.mb.s,U.mb.d):a}
 function mbR(){const p=pageA(mbList(),U.mb.pg,U.mb.ps);U.mb.pg=p.c;const b=$("#mbBody");if(!p.i.length)b.innerHTML=`<tr><td colspan="7"><div class="empty">当前筛选条件下没有数据</div></td></tr>`;else b.innerHTML=p.i.map(r=>`<tr><td class="nowrap">${r.account}</td><td>${esc(r.name)}</td><td>${r.bandwidth} Mbps</td><td>${tgConn(r.conn)}</td><td>${r.lat} ms</td><td>${r.loss}%</td><td>${r.jitter} ms</td></tr>`).join("");$("#mbPg").textContent=`第 ${p.c}/${p.n} 页，共 ${p.t} 条`;$("#mbPrev").disabled=p.c<=1;$("#mbNext").disabled=p.c>=p.n;setSort()}
-function ctR(){const kv=(arr)=>arr.map(([k,v])=>`<div><b>${k}</b><span>${v}</span></div>`).join("");$("#ctInfo").innerHTML=kv([["容器ID",`<span class='copy-inline' data-copy='${esc(S.docker.id)}'><span class='copy-val'>${esc(S.docker.id)}</span><span class='copy-hover' data-copy='${esc(S.docker.id)}'>复制</span></span>`],["容器名称",esc(S.docker.name)],["镜像",`${esc(S.docker.img)}:${esc(S.docker.ver)}`],["最近拉取",esc(S.docker.pull)],["启动时间",esc(S.docker.start)],["运行时长",esc(S.docker.up)],["重启策略",esc(S.docker.policy)]]);$("#pmBody").innerHTML=S.docker.ports.map(p=>`<tr><td>${p[0]}</td><td>${p[1]}</td><td>${esc(p[2])}</td></tr>`).join("");$("#mtBody").innerHTML=S.docker.mounts.map(m=>`<tr><td>${esc(m[0])}</td><td>${esc(m[1])}</td><td>${esc(m[2])}</td></tr>`).join("");const resEl=$("#resInfo");if(resEl)resEl.innerHTML=kv([["CPU 实时占用",`${S.chart.cpu.at(-1)}%`],["内存实时占用",`${S.chart.mem.at(-1)}%`],["CPU 上限",S.docker.limit.cpu],["内存上限",S.docker.limit.mem]]);$("#hostInfo").innerHTML=kv([["宿主机名",S.host.name],["系统版本",S.host.os],["内核",S.host.kernel],["DNS",S.host.dns]]);$("#ifBody").innerHTML=S.host.ifs.map(i=>`<tr><td>${i.n}</td><td>${i.ip}</td><td>${i.gw}</td><td>${i.dns}</td></tr>`).join("");$("#rtList").innerHTML=S.host.routes.map(r=>`<li>${esc(r)}</li>`).join("");
-const rg=$("#resRange");if(rg)rg.value=String(U.resRange);const rangeHours=Math.max(6,Math.min(24,parseInt(U.resRange,10)||24)),pp=n=>String(n).padStart(2,"0"),tickIdx=n=>[0,.25,.5,.75,1].map(r=>Math.round((n-1)*r)).filter((v,i,a)=>a.indexOf(v)===i),mkTimes=(n,h)=>{const nowD=new Date();if(n<=1)return [`${pp(nowD.getHours())}:${pp(nowD.getMinutes())}`];return Array.from({length:n},(_,i)=>{const back=h*(n-1-i)/(n-1),d=new Date(nowD.getTime()-back*36e5);return `${pp(d.getHours())}:${pp(d.getMinutes())}`})},takeRange=(arr,total=24,minPts=4)=>{const target=Math.max(minPts,Math.round(arr.length*rangeHours/total));return arr.slice(-Math.max(2,Math.min(arr.length,target)))};
-const cpuData=takeRange(S.chart.cpu1,24,4),ramPct=takeRange(S.chart.mem1,24,4),tfAll=[];for(let i=0;i<S.chart.tf.length;i+=2)tfAll.push({u:S.chart.tf[i],d:S.chart.tf[i+1]});const tfData=takeRange(tfAll,24,4);
-draw("#cCpu",(x,w,h)=>{const d=cpuData,n=d.length,pad={l:40,r:14,t:20,b:30},aw=w-pad.l-pad.r,ah=h-pad.t-pad.b,times=mkTimes(n,rangeHours);x.clearRect(0,0,w,h);x.strokeStyle="#edf2fa";x.lineWidth=1;x.fillStyle="#8c8c8c";x.font="10px sans-serif";x.textAlign="right";x.textBaseline="middle";for(let i=0;i<=4;i++){const v=100-i*25,py=pad.t+i*ah/4;x.beginPath();x.moveTo(pad.l,py);x.lineTo(w-pad.r,py);x.stroke();x.fillText(`${v}%`,pad.l-6,py)}x.strokeStyle="#d9e2f0";x.beginPath();x.moveTo(pad.l,pad.t);x.lineTo(pad.l,h-pad.b);x.lineTo(w-pad.r,h-pad.b);x.stroke();const pts=d.map((v,i)=>({x:pad.l+i/(n-1)*aw,y:h-pad.b-v/100*ah,v,tm:times[i]}));x.fillStyle="rgba(45,100,216,.18)";x.beginPath();pts.forEach((p,i)=>i?x.lineTo(p.x,p.y):x.moveTo(p.x,p.y));x.lineTo(pad.l+aw,h-pad.b);x.lineTo(pad.l,h-pad.b);x.closePath();x.fill();x.strokeStyle="#2d64d8";x.lineWidth=2;x.beginPath();pts.forEach((p,i)=>i?x.lineTo(p.x,p.y):x.moveTo(p.x,p.y));x.stroke();x.fillStyle="#fff";x.strokeStyle="#2d64d8";x.lineWidth=1.5;pts.forEach(p=>{x.beginPath();x.arc(p.x,p.y,2.7,0,Math.PI*2);x.fill();x.stroke()});x.font="12px sans-serif";x.textAlign="left";x.textBaseline="middle";const ltxt="CPU 使用率",lw=10+4+x.measureText(ltxt).width,lx=w-pad.r-lw,ly=12;x.fillStyle="#2d64d8";x.fillRect(lx,ly-5,10,10);x.fillStyle="#4c5d80";x.fillText(ltxt,lx+14,ly);x.fillStyle="#8c8c8c";x.font="10px sans-serif";x.textAlign="center";x.textBaseline="top";tickIdx(n).forEach(idx=>{const px=pad.l+idx/(n-1)*aw;x.fillRect(px,h-pad.b+1,1,3);x.fillText(times[idx],px,h-pad.b+6)});U.cpuChart={pts,pad,w,h,aw,times}});
-draw("#cRam",(x,w,h)=>{const total=parseInt(S.docker.limit.mem,10)||2048,used=ramPct.map(v=>Math.round(total*v/100)),n=used.length,pad={l:48,r:14,t:20,b:30},aw=w-pad.l-pad.r,ah=h-pad.t-pad.b,times=mkTimes(n,rangeHours),mx=Math.ceil(total/200)*200;x.clearRect(0,0,w,h);x.strokeStyle="#edf2fa";x.lineWidth=1;x.fillStyle="#8c8c8c";x.font="10px sans-serif";x.textAlign="right";x.textBaseline="middle";for(let i=0;i<=4;i++){const v=Math.round(mx*(4-i)/4),py=pad.t+i*ah/4;x.beginPath();x.moveTo(pad.l,py);x.lineTo(w-pad.r,py);x.stroke();x.fillText(`${v} MB`,pad.l-6,py)}x.strokeStyle="#d9e2f0";x.beginPath();x.moveTo(pad.l,pad.t);x.lineTo(pad.l,h-pad.b);x.lineTo(w-pad.r,h-pad.b);x.stroke();const pts=used.map((v,i)=>({x:pad.l+i/(n-1)*aw,y:h-pad.b-v/mx*ah,v,total,p:Math.round(v/total*100),tm:times[i]}));x.fillStyle="rgba(45,100,216,.16)";x.beginPath();pts.forEach((p,i)=>i?x.lineTo(p.x,p.y):x.moveTo(p.x,p.y));x.lineTo(pad.l+aw,h-pad.b);x.lineTo(pad.l,h-pad.b);x.closePath();x.fill();x.strokeStyle="#2d64d8";x.lineWidth=2;x.beginPath();pts.forEach((p,i)=>i?x.lineTo(p.x,p.y):x.moveTo(p.x,p.y));x.stroke();x.fillStyle="#fff";x.strokeStyle="#2d64d8";x.lineWidth=1.5;pts.forEach(p=>{x.beginPath();x.arc(p.x,p.y,2.7,0,Math.PI*2);x.fill();x.stroke()});const yTotal=h-pad.b-total/mx*ah;x.setLineDash([4,4]);x.strokeStyle="#91d5ff";x.lineWidth=1.5;x.beginPath();x.moveTo(pad.l,yTotal);x.lineTo(w-pad.r,yTotal);x.stroke();x.setLineDash([]);x.font="12px sans-serif";x.textAlign="left";x.textBaseline="middle";const lg=[{t:"RAM 使用率",c:"#2d64d8"},{t:"总内存",c:"#91d5ff"}],box=10,gap=12,txtGap=4,lgW=lg.reduce((s,it,i)=>s+box+txtGap+x.measureText(it.t).width+(i<lg.length-1?gap:0),0);let lx=w-pad.r-lgW,ly=12;lg.forEach((it,i)=>{x.fillStyle=it.c;x.fillRect(lx,ly-5,box,10);lx+=box+txtGap;x.fillStyle="#4c5d80";x.fillText(it.t,lx,ly);lx+=x.measureText(it.t).width+(i<lg.length-1?gap:0)});x.fillStyle="#8c8c8c";x.font="10px sans-serif";x.textAlign="center";x.textBaseline="top";tickIdx(n).forEach(idx=>{const px=pad.l+idx/(n-1)*aw;x.fillRect(px,h-pad.b+1,1,3);x.fillText(times[idx],px,h-pad.b+6)});U.ramChart={pts,pad,w,h,aw,total}});
-draw("#cTraffic",(x,w,h)=>{const m=tfData,n=m.length,pad={l:46,r:14,t:20,b:28},aw=w-pad.l-pad.r,ah=h-pad.t-pad.b,mx=Math.ceil(Math.max(1,...m.map(o=>Math.max(o.u,o.d)))/10)*10,times=mkTimes(n,rangeHours);x.clearRect(0,0,w,h);x.strokeStyle="#edf2fa";x.lineWidth=1;x.fillStyle="#8c8c8c";x.font="10px sans-serif";x.textAlign="right";x.textBaseline="middle";for(let i=0;i<=4;i++){const v=Math.round(mx*(4-i)/4),py=pad.t+i*ah/4;x.beginPath();x.moveTo(pad.l,py);x.lineTo(w-pad.r,py);x.stroke();x.fillText(String(v),pad.l-6,py)}x.strokeStyle="#d9e2f0";x.beginPath();x.moveTo(pad.l,pad.t);x.lineTo(pad.l,h-pad.b);x.lineTo(w-pad.r,h-pad.b);x.stroke();x.fillStyle="#8c8c8c";x.textAlign="left";x.textBaseline="alphabetic";x.fillText("Mbps",pad.l-34,pad.t-6);x.textAlign="center";x.textBaseline="top";tickIdx(n).forEach(idx=>{const px=pad.l+idx/(n-1)*aw;x.fillRect(px,h-pad.b+1,1,3);x.fillText(times[idx],px,h-pad.b+6)});const line=(k,c)=>{x.beginPath();x.strokeStyle=c;x.lineWidth=2;m.forEach((o,i)=>{const px=pad.l+i/(n-1)*aw,py=h-pad.b-o[k]/mx*ah;i?x.lineTo(px,py):x.moveTo(px,py)});x.stroke()};line("u","#2d64d8");line("d","#21a675");U.traffic={m,times,pad,aw,w,h,mx,ah};const lg=[{t:"上行",c:"#2d64d8"},{t:"下行",c:"#21a675"}],box=10,gap=14,txtGap=4;x.font="12px sans-serif";x.textAlign="left";x.textBaseline="middle";const lgW=lg.reduce((s,it,i)=>s+box+txtGap+x.measureText(it.t).width+(i<lg.length-1?gap:0),0);let lx=w-pad.r-lgW,ly=13;lg.forEach((it,i)=>{x.fillStyle=it.c;x.fillRect(lx,ly-box/2,box,box);lx+=box+txtGap;x.fillStyle="#4c5d80";x.fillText(it.t,lx,ly);lx+=x.measureText(it.t).width+(i<lg.length-1?gap:0)})}) }
 function lgList(){let a=S.logs.filter(l=>(U.lg.tp==="all"||l.type===U.lg.tp)&&(!U.lg.q||`${l.time}${l.type}${l.level}${l.content}`.toLowerCase().includes(U.lg.q)));return sortA(a,U.lg.s,U.lg.d)}
 function lgR(){const p=pageA(lgList(),U.lg.pg,U.lg.ps);U.lg.pg=p.c;const b=$("#lgBody");if(!p.i.length)b.innerHTML=`<tr><td colspan="4"><div class="empty">当前筛选条件下没有日志</div></td></tr>`;else b.innerHTML=p.i.map(l=>`<tr><td class="nowrap">${l.time}</td><td class="nowrap">${l.type}</td><td class="nowrap">${l.level}</td><td>${esc(l.content)}</td></tr>`).join("");$("#lgPg").textContent=`第 ${p.c}/${p.n} 页，共 ${p.t} 行`;$("#lgPrev").disabled=p.c<=1;$("#lgNext").disabled=p.c>=p.n;setSort() }
-function alList(){let a=S.alerts.filter(v=>(U.al.lv==="all"||v.level===U.al.lv)&&(U.al.st==="all"||v.status===U.al.st)&&(!U.al.q||`${v.type}${v.desc}`.toLowerCase().includes(U.al.q)));return sortA(a,U.al.s,U.al.d)}
-function alR(){const p=pageA(alList(),U.al.pg,U.al.ps);U.al.pg=p.c;const b=$("#alBody");if(!p.i.length)b.innerHTML=`<tr><td colspan="6"><div class="empty">当前筛选条件下没有事件<br><button class='sbtn' data-clear='al'>清空筛选</button></div></td></tr>`;else b.innerHTML=p.i.map(a=>`<tr><td><input type='checkbox' data-al='${a.id}' ${U.al.sel.has(a.id)?"checked":""}></td><td>${a.time}</td><td><span class='${a.level==="高"?"lvH":a.level==="中"?"lvM":"lvL"}'>${a.level}</span></td><td>${a.type}</td><td>${esc(a.desc)}</td><td>${a.status}</td></tr>`).join("");$("#alPg").textContent=`第 ${p.c}/${p.n} 页，共 ${p.t} 条`;$("#alPrev").disabled=p.c<=1;$("#alNext").disabled=p.c>=p.n;$("#alAll").checked=p.i.length&&p.i.every(x=>U.al.sel.has(x.id));setSort() }
-function setR(){ $("#setName").value=S.deviceInfo.name;$("#setTz").value=S.set.tz;$("#setBindNet").value="上海朗桥维视通讯技术有限公司";$("#setBindSt").value=S.deviceInfo.bind;$("#setPort").value="8080";$("#setOldPwd").value="";$("#setNewPwd").value="";$("#setNewPwd2").value="" }
-function allR(){topR();ovR();connR();byR();pxR();mbR();ctR();lgR();setR()}
-function sw(p){U.p=p;$$('.nav').forEach(n=>n.classList.toggle('active',n.dataset.p===p));$$('.page').forEach(pg=>pg.classList.toggle('active',pg.id===`p-${p}`));if(p!=="overview"){const tip=$("#onlineTip"),tt=$("#trafficTip");tip&&tip.classList.remove("show");tt&&tt.classList.remove("show")}if(p!=="overview"){const ct=$("#cpuTip"),rt=$("#ramTip");ct&&ct.classList.remove("show");rt&&rt.classList.remove("show")}if(p==="overview"){ovR();ctR()}if(p==="container")ctR()}
-function ipOk(v,tp){const ip=/^(25[0-5]|2[0-4]\d|[01]?\d\d?)(\.(25[0-5]|2[0-4]\d|[01]?\d\d?)){3}$/,sub=/^(25[0-5]|2[0-4]\d|[01]?\d\d?)(\.(25[0-5]|2[0-4]\d|[01]?\d\d?)){3}\/(3[0-2]|[12]?\d)$/;return tp==="单IP"?ip.test(v):sub.test(v)}
-function byForm(r){const e=!!r,d=r||{name:"",targetType:"网段",targetAddress:"",note:""};openM(e?"编辑旁路规则":"新建旁路规则",`<div class='set'><div class='f'><label>规则名称</label><input id='fByN' value='${esc(d.name)}'></div><div class='f'><label>目标类型</label><select id='fByT'><option ${d.targetType==="网段"?"selected":""}>网段</option><option ${d.targetType==="单IP"?"selected":""}>单IP</option></select></div><div class='f full'><label>目标地址</label><input id='fByA' value='${esc(d.targetAddress)}' placeholder='例 192.168.10.0/24'></div><div class='f full'><label>备注</label><textarea id='fByR'>${esc(d.note||"")}</textarea></div></div>`,[{t:"取消",c:"btn-default"},{t:"保存",c:"btn-primary",loading:true,close:false,f:()=>{const n=$("#fByN").value.trim(),t=$("#fByT").value,a=$("#fByA").value.trim(),m=$("#fByR").value.trim();if(!n||!a)return toast("请填写完整信息","warn");if(!ipOk(a,t))return toast("目标地址格式不正确","err");if(e){Object.assign(r,{name:n,targetType:t,targetAddress:a,note:m,updatedAt:now()})}else{S.bypass.unshift({id:Math.max(...S.bypass.map(x=>x.id))+1,name:n,targetType:t,targetAddress:a,status:"enabled",hitCount:0,failReason:"-",updatedAt:now(),note:m})}closeM();byR();ovR();toast(e?"规则已更新":"规则已创建")}}],{size:"standard"})}
-function pxForm(r){const e=!!r,d=r||{name:"",externalPort:"",targetIp:"",targetPort:"",note:""};openM(e?"编辑代理规则":"新建代理规则",`<div class='set'><div class='f'><label>代理名称</label><input id='fPxN' value='${esc(d.name)}'></div><div class='f'><label>对外端口</label><input type='number' id='fPxE' value='${esc(d.externalPort)}'></div><div class='f'><label>内网目标 IP</label><input id='fPxI' value='${esc(d.targetIp)}'></div><div class='f'><label>内网目标端口</label><input type='number' id='fPxP' value='${esc(d.targetPort)}'></div><div class='f full'><label>备注</label><textarea id='fPxR'>${esc(d.note||"")}</textarea></div></div>`,[{t:"取消",c:"btn-default"},{t:"保存",c:"btn-primary",loading:true,close:false,f:()=>{const n=$("#fPxN").value.trim(),ep=+$("#fPxE").value,ip=$("#fPxI").value.trim(),tp=+$("#fPxP").value,rm=$("#fPxR").value.trim(),ok=/^(25[0-5]|2[0-4]\d|[01]?\d\d?)(\.(25[0-5]|2[0-4]\d|[01]?\d\d?)){3}$/.test(ip);if(!n||!ep||!ip||!tp)return toast("请填写完整信息","warn");if(!ok)return toast("内网目标 IP 格式不正确","err");if(ep<1||ep>65535||tp<1||tp>65535)return toast("端口范围应为 1-65535","err");if(e){Object.assign(r,{name:n,externalPort:ep,targetIp:ip,targetPort:tp,note:rm,updatedAt:now()})}else{S.proxy.unshift({id:Math.max(...S.proxy.map(x=>x.id))+1,name:n,externalPort:ep,targetIp:ip,targetPort:tp,protocol:"TCP",status:"enabled",connCount:0,health:"正常",updatedAt:now(),note:rm})}closeM();pxR();ovR();toast(e?"代理已更新":"代理已创建")}}],{size:"standard"})}
-function diagTxt(){return["vCPE 诊断摘要",`生成时间：${now()}`,`设备：${S.deviceInfo.name}`,`状态：${sts(S.deviceInfo.status)}`,`网络：${S.deviceInfo.network}`,`虚拟地址：${S.deviceInfo.vAddr}`,`连接：${S.conn.type} / 延迟 ${S.conn.lat}ms / 丢包 ${S.conn.loss}%`,`容器：${S.docker.name} / 镜像 ${S.docker.ver}`,`宿主：${S.host.name} / ${S.host.os}`,"","最近重点事件：",...S.recent.slice(0,5).map((t,i)=>`- ${mkTime(220-i*3)} ${t}`)].join("\n")}
-function exp(title,file,txt){const h=dl(file,txt);openM(title,`<p>文件已生成，可复制或下载。</p><div class='pre'>${esc(txt)}</div><div class='row' style='margin-top:16px'><button id='cpExp'>复制文本</button><a href='${h}' download='${esc(file)}'>下载文件</a></div>`,[{t:"关闭",c:"btn-default"}],{size:"data"});setTimeout(()=>{const b=$("#cpExp");b&&b.addEventListener("click",()=>copyTxt(txt))},0)}
+function setR(){ $("#setName").value=S.deviceInfo.name;$("#setBindNet").value="上海朗桥维视通讯技术有限公司";$("#setBindSt").value=S.deviceInfo.bind;$("#setPort").value="8080";$("#setOldPwd").value="";$("#setNewPwd").value="";$("#setNewPwd2").value="" }
+function allR(){topR();ovR();connR();mbR();lgR();setR()}
+function sw(p){U.p=p;$$('.nav').forEach(n=>n.classList.toggle('active',n.dataset.p===p));$$('.page').forEach(pg=>pg.classList.toggle('active',pg.id===`p-${p}`));if(p!=="overview"){const tip=$("#onlineTip");tip&&tip.classList.remove("show")}if(p==="overview")ovR()}
 function bind(){ md.x.onclick=closeM;md.box.onclick=e=>e.target===md.box&&md.maskClosable&&closeM();document.addEventListener("keydown",e=>{if(e.key==="Escape"&&md.box.classList.contains("show")&&md.escClosable)closeM()});$$('.nav').forEach(n=>n.onclick=()=>sw(n.dataset.p));$("#topRestart").onclick=()=>confirmM("重启服务","确认重启本机 vCPE 服务？该操作会造成短时中断。",()=>{S.deviceInfo.heartbeat=now();topR();toast("服务重启命令已提交")},"确认重启");$("#topLogout").onclick=()=>confirmM("退出登录","确认退出当前登录会话？",()=>{authClr();showLogin()},"退出");
 const onCv=$("#cOnline"),onTip=$("#onlineTip");if(onCv&&onTip){const hide=()=>onTip.classList.remove("show");onCv.addEventListener("mouseleave",hide);onCv.addEventListener("mousemove",e=>{const bars=(U.online&&U.online.bars)||[];if(!bars.length)return hide();const r=onCv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,b=bars.find(it=>x>=it.x&&x<=it.x+it.w&&y>=it.y-2&&y<=it.y+it.h+4);if(!b)return hide();const s=b.v>=99?"无异常":"存在波动";onTip.innerHTML=`<div class="t1">${b.tm}</div><div class="t2"><span class="online-dot" style="background:${b.c}"></span>${s}（在线率 ${b.v}%）</div>`;onTip.classList.add("show");const tw=onTip.offsetWidth,th=onTip.offsetHeight,lx=Math.min(Math.max(8,x+12),r.width-tw-8),ty=Math.max(8,b.y-th-10);onTip.style.left=`${lx}px`;onTip.style.top=`${ty}px`})}
-const tfCv=$("#cTraffic"),tfTip=$("#trafficTip");if(tfCv&&tfTip){const hide=()=>tfTip.classList.remove("show");tfCv.addEventListener("mouseleave",hide);tfCv.addEventListener("mousemove",e=>{const t=U.traffic||{};if(!t.m||!t.m.length||!t.pad)return hide();const r=tfCv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;if(x<t.pad.l||x>t.w-t.pad.r||y<t.pad.t-8||y>t.h-t.pad.b+8)return hide();let idx=Math.round((x-t.pad.l)/t.aw*(t.m.length-1));idx=Math.max(0,Math.min(t.m.length-1,idx));const row=t.m[idx],tm=t.times[idx]||"-";tfTip.innerHTML=`<div class="t1">${tm}</div><div class="t2"><span class="online-dot" style="background:#2d64d8"></span>上行：${row.u} Mbps</div><div class="t2"><span class="online-dot" style="background:#21a675"></span>下行：${row.d} Mbps</div>`;tfTip.classList.add("show");const px=t.pad.l+idx/(t.m.length-1)*t.aw,py=t.h-t.pad.b-Math.max(row.u,row.d)/t.mx*t.ah,tw=tfTip.offsetWidth,th=tfTip.offsetHeight,lx=Math.min(Math.max(8,px+10),r.width-tw-8),ty=Math.max(8,py-th-10);tfTip.style.left=`${lx}px`;tfTip.style.top=`${ty}px`})}
-const cpuCv=$("#cCpu"),cpuTip=$("#cpuTip");if(cpuCv&&cpuTip){const hide=()=>cpuTip.classList.remove("show");cpuCv.addEventListener("mouseleave",hide);cpuCv.addEventListener("mousemove",e=>{const t=U.cpuChart||{},pts=t.pts||[];if(!pts.length||!t.pad)return hide();const r=cpuCv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;if(x<t.pad.l||x>t.w-t.pad.r||y<t.pad.t-10||y>t.h-t.pad.b+8)return hide();let idx=Math.round((x-t.pad.l)/t.aw*(pts.length-1));idx=Math.max(0,Math.min(pts.length-1,idx));const p=pts[idx];cpuTip.innerHTML=`<div class="t1">${p.tm}</div><div class="t2"><span class="online-dot" style="background:#2d64d8"></span>CPU：${p.v}%</div>`;cpuTip.classList.add("show");const tw=cpuTip.offsetWidth,th=cpuTip.offsetHeight,lx=Math.min(Math.max(8,p.x+10),r.width-tw-8),ty=Math.max(8,p.y-th-10);cpuTip.style.left=`${lx}px`;cpuTip.style.top=`${ty}px`})}
-const ramCv=$("#cRam"),ramTip=$("#ramTip");if(ramCv&&ramTip){const hide=()=>ramTip.classList.remove("show");ramCv.addEventListener("mouseleave",hide);ramCv.addEventListener("mousemove",e=>{const t=U.ramChart||{},pts=t.pts||[];if(!pts.length||!t.pad)return hide();const r=ramCv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;if(x<t.pad.l||x>t.w-t.pad.r||y<t.pad.t-10||y>t.h-t.pad.b+8)return hide();let idx=Math.round((x-t.pad.l)/t.aw*(pts.length-1));idx=Math.max(0,Math.min(pts.length-1,idx));const p=pts[idx];ramTip.innerHTML=`<div class="t1">${p.tm}</div><div class="t2"><span class="online-dot" style="background:#2d64d8"></span>RAM：${p.v} MB（${p.p}%）</div><div class="t2"><span class="online-dot" style="background:#91d5ff"></span>总内存：${p.total} MB</div>`;ramTip.classList.add("show");const tw=ramTip.offsetWidth,th=ramTip.offsetHeight,lx=Math.min(Math.max(8,p.x+10),r.width-tw-8),ty=Math.max(8,p.y-th-10);ramTip.style.left=`${lx}px`;ramTip.style.top=`${ty}px`})}
-const runCheckBtn=$("#runCheck");if(runCheckBtn)runCheckBtn.onclick=()=>confirmM("执行连通性自检","确认开始自检？将执行 DNS、时间、端口、平台和目标连通检查。",()=>{U.check=[{i:"DNS 是否正常",r:"通过",d:"解析测试通过，平均耗时 18ms。"},{i:"时间是否正常",r:"警告",d:"系统时间偏差 2.7 秒，建议校准。"},{i:"端口是否冲突",r:"失败",d:"检测到 19100 端口被占用。"},{i:"上级平台是否可达",r:"通过",d:"平台握手正常，返回码 200。"},{i:"常见目标是否可达",r:"警告",d:"目标 10.1.3.8:443 响应超时。"}];checkR();toast("自检已完成")},"开始自检");
-const resRangeEl=$("#resRange");if(resRangeEl)resRangeEl.onchange=e=>{U.resRange=parseInt(e.target.value,10)||24;ctR()};
-$("#bySearch").oninput=e=>{U.by.q=e.target.value.trim().toLowerCase();U.by.pg=1;byR()};$("#bySt").onchange=e=>{U.by.st=e.target.value;U.by.pg=1;byR()};$("#byTp").onchange=e=>{U.by.tp=e.target.value;U.by.pg=1;byR()};$("#byNew").onclick=()=>byForm();$("#byPrev").onclick=()=>{U.by.pg--;byR()};$("#byNext").onclick=()=>{U.by.pg++;byR()};
-$("#pxSearch").oninput=e=>{U.px.q=e.target.value.trim().toLowerCase();U.px.pg=1;pxR()};$("#pxSt").onchange=e=>{U.px.st=e.target.value;U.px.pg=1;pxR()};$("#pxHl").onchange=e=>{U.px.hl=e.target.value;U.px.pg=1;pxR()};$("#pxNew").onclick=()=>pxForm();$("#pxPrev").onclick=()=>{U.px.pg--;pxR()};$("#pxNext").onclick=()=>{U.px.pg++;pxR()};
 $("#mbSearch").oninput=e=>{U.mb.q=e.target.value.trim().toLowerCase();U.mb.pg=1;mbR()};$("#mbSt").onchange=e=>{U.mb.st=e.target.value;U.mb.pg=1;mbR()};$("#mbPrev").onclick=()=>{U.mb.pg--;mbR()};$("#mbNext").onclick=()=>{U.mb.pg++;mbR()};
 $("#logType").onchange=e=>{U.lg.tp=e.target.value;U.lg.pg=1;lgR()};$("#logKw").oninput=e=>{U.lg.q=e.target.value.trim().toLowerCase();U.lg.pg=1;lgR()};$("#lgPrev").onclick=()=>{U.lg.pg--;lgR()};$("#lgNext").onclick=()=>{U.lg.pg++;lgR()};
-$("#ctRestart").onclick=()=>confirmM("重启容器","确认重启容器？该操作会短暂中断流量。",()=>{S.docker.start=now();S.docker.up="0小时00分";S.deviceInfo.heartbeat=now();ctR();topR();toast("容器重启命令已提交")},"确认重启");
-$("#ctExportLog").onclick=()=>{const t=S.logs.filter(x=>x.type==="容器日志").slice(0,40).map(l=>`${l.time} [${l.level}] ${l.content}`).join("\n")||"暂无容器日志";exp("容器日志导出",`container_logs_${Date.now()}.txt`,t)};
-$("#ctExportDiag").onclick=()=>exp("容器诊断包导出",`container_diag_${Date.now()}.txt`,diagTxt()+"\n\n--- 容器信息 ---\n"+`容器ID:${S.docker.id}\n镜像:${S.docker.img}:${S.docker.ver}\n启动时间:${S.docker.start}\n重启策略:${S.docker.policy}`);
-$("#setSave").onclick=()=>{const n=$("#setName").value.trim(),o=$("#setOldPwd").value,a=$("#setNewPwd").value,b=$("#setNewPwd2").value,pwdTouched=!!(o||a||b);if(!n)return toast("设备名称不能为空","warn");if(pwdTouched){if(!o)return toast("请输入旧密码","warn");if(o!==S.set.panelPwd)return toast("旧密码不正确","err");if(a.length<8)return toast("密码至少 8 位","warn");if(a!==b)return toast("两次输入不一致","err");S.set.panelPwd=a}S.deviceInfo.name=n;S.set.tz=$("#setTz").value;S.deviceInfo.heartbeat=now();topR();$("#setOldPwd").value="";$("#setNewPwd").value="";$("#setNewPwd2").value="";toast(pwdTouched?"设置已保存，密码已更新":"设置已保存")};
+$("#setSave").onclick=()=>{const n=$("#setName").value.trim(),o=$("#setOldPwd").value,a=$("#setNewPwd").value,b=$("#setNewPwd2").value,pwdTouched=!!(o||a||b);if(!n)return toast("设备名称不能为空","warn");if(pwdTouched){if(!o)return toast("请输入旧密码","warn");if(o!==S.set.panelPwd)return toast("旧密码不正确","err");if(a.length<8)return toast("密码至少 8 位","warn");if(a!==b)return toast("两次输入不一致","err");S.set.panelPwd=a}S.deviceInfo.name=n;S.deviceInfo.heartbeat=now();topR();$("#setOldPwd").value="";$("#setNewPwd").value="";$("#setNewPwd2").value="";toast(pwdTouched?"设置已保存，密码已更新":"设置已保存")};
 $("#setRebind").onclick=()=>openM("重新绑定",`<p>请输入新的接入码。</p><input id='rb' placeholder='请输入接入码'>`,[{t:"取消",c:"btn-default"},{t:"下一步",c:"btn-primary",loading:true,close:false,f:()=>{const c=$("#rb").value.trim();if(!c)return toast("请填写接入码","warn");closeM();confirmM("确认重置绑定","确认使用新的接入码重置绑定？",()=>{S.deviceInfo.bind=c.toUpperCase();setR();toast("重新绑定已完成","warn")},"确认重置")}}],{size:"standard"});
-window.addEventListener("resize",()=>{if(U.p==="overview"){ovR();ctR()}if(U.p==="container")ctR()});
+window.addEventListener("resize",()=>{if(U.p==="overview")ovR()});
 
-document.addEventListener("click",e=>{const th=e.target.closest("th.sort");if(th){const mp={by:U.by,px:U.px,mb:U.mb,lg:U.lg,al:U.al}[th.dataset.t],k=th.dataset.k;if(mp.s===k)mp.d=mp.d==="asc"?"desc":"asc";else{mp.s=k;mp.d="asc"}if(th.dataset.t==="by")byR();if(th.dataset.t==="px")pxR();if(th.dataset.t==="mb")mbR();if(th.dataset.t==="lg")lgR();if(th.dataset.t==="al")alR();return}
-const a=e.target.dataset.act,id=+e.target.dataset.id;if(a){if(a.startsWith("b")){const r=S.bypass.find(x=>x.id===id);if(!r)return;if(a==="bv")return openM("旁路规则详情",`<div class='kv'>${[["规则名称",r.name],["目标类型",r.targetType],["目标地址",r.targetAddress],["状态",r.status==="enabled"?"启用":"停用"],["最近命中",r.hitCount],["最近失败原因",r.failReason],["更新时间",r.updatedAt]].map(([k,v])=>`<div><b>${k}</b><span>${esc(v)}</span></div>`).join("")}</div><div style='margin-top:16px'><b>备注：</b>${esc(r.note||"-")}</div>`,[{t:"关闭",c:"btn-default"}],{size:"standard"});if(a==="be")return byForm(r);if(a==="bt")return confirmM(`${r.status==="enabled"?"停用":"启用"}规则`,`确认${r.status==="enabled"?"停用":"启用"}规则「${r.name}」？`,()=>{r.status=r.status==="enabled"?"disabled":"enabled";r.updatedAt=now();byR();ovR();toast("规则状态已更新")},"确认");if(a==="bd")return confirmM("删除规则",`确认删除规则「${r.name}」？`,()=>{S.bypass=S.bypass.filter(x=>x.id!==id);byR();ovR();toast("规则已删除","warn")},"确认删除")}
-if(a.startsWith("p")){const r=S.proxy.find(x=>x.id===id);if(!r)return;if(a==="ptest"){const rt=r.health==="正常"?`${16+r.id%14} ms`:"超时";if(r.health==="正常")return toast(`${r.name} 测试通过，响应 ${rt}`);if(r.health==="上游不可达")return toast(`${r.name} 测试失败：上游不可达（${rt}）`,"err");return toast(`${r.name} 测试失败：端口冲突（${rt}）`,"err")}if(a==="pe")return pxForm(r);if(a==="pt")return confirmM(`${r.status==="enabled"?"停用":"启用"}代理`,`确认${r.status==="enabled"?"停用":"启用"}代理「${r.name}」？`,()=>{r.status=r.status==="enabled"?"disabled":"enabled";r.updatedAt=now();pxR();ovR();toast("代理状态已更新")},"确认");if(a==="pd")return confirmM("删除代理",`确认删除代理「${r.name}」？`,()=>{S.proxy=S.proxy.filter(x=>x.id!==id);pxR();ovR();toast("代理已删除","warn")},"确认删除")}
-}
-if(e.target.dataset.copy!==undefined)return copyTxt(e.target.dataset.copy);
-if(e.target.dataset.cpcheck!==undefined){const r=U.check[+e.target.dataset.cpcheck];return r&&copyTxt(`${r.i} | ${r.r} | ${r.d}`)}
-if(e.target.dataset.clear){const t=e.target.dataset.clear;if(t==="by"){U.by={...U.by,q:"",st:"all",tp:"all",pg:1};$("#bySearch").value="";$("#bySt").value=$("#byTp").value="all";byR()}if(t==="px"){U.px={...U.px,q:"",st:"all",hl:"all",pg:1};$("#pxSearch").value="";$("#pxSt").value=$("#pxHl").value="all";pxR()}}
+document.addEventListener("click",e=>{const th=e.target.closest("th.sort");if(!th)return;const mp={mb:U.mb,lg:U.lg}[th.dataset.t],k=th.dataset.k;if(!mp)return;if(mp.s===k)mp.d=mp.d==="asc"?"desc":"asc";else{mp.s=k;mp.d="asc"}if(th.dataset.t==="mb")mbR();if(th.dataset.t==="lg")lgR();
 });
 }
 function init(){bindLogin();showLogin()}init();

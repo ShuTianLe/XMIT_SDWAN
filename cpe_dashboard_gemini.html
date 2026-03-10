@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPE/vCPE 设备管理系统 - 产品原型</title>
+    <style>
+        /* 参考 Apple Design Guidelines 的基础视觉变量 */
+        :root {
+            --apple-bg: #F5F5F7;
+            --apple-sidebar: #F2F2F7;
+            --apple-card: #FFFFFF;
+            --apple-text-main: #1D1D1F;
+            --apple-text-mut: #86868B;
+            --apple-blue: #007AFF;
+            --apple-green: #34C759;
+            --apple-orange: #FF9F0A;
+            --apple-purple: #AF52DE;
+            --apple-border: #E5E5EA;
+            --apple-shadow: 0 4px 24px rgba(0,0,0,0.04);
+            --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-stack);
+            background-color: var(--apple-bg);
+            color: var(--apple-text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ================= 列表视图样式 ================= */
+        .list-view {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            padding: 40px 60px;
+            box-sizing: border-box;
+            background: var(--apple-bg);
+            overflow-y: auto;
+        }
+
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 32px;
+        }
+
+        .list-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .list-subtitle {
+            font-size: 15px;
+            color: var(--apple-text-mut);
+            margin-top: 8px;
+        }
+
+        .list-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .search-input {
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--apple-border);
+            background: var(--apple-card);
+            font-family: var(--font-stack);
+            font-size: 14px;
+            width: 280px;
+            outline: none;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .search-input:focus {
+            border-color: var(--apple-blue);
+            box-shadow: 0 0 0 3px rgba(0,122,255,0.1);
+        }
+
+        .filter-tabs {
+            display: flex;
+            background: #E5E5EA;
+            padding: 3px;
+            border-radius: 10px;
+            margin-right: 16px;
+        }
+        .filter-tab {
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--apple-text-mut);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-tab.active {
+            background: var(--apple-card);
+            color: var(--apple-text-main);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            font-weight: 600;
+        }
+
+        .table-container {
+            background: var(--apple-card);
+            border-radius: 16px;
+            box-shadow: var(--apple-shadow);
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--apple-border);
+        }
+
+        th {
+            font-size: 13px;
+            color: var(--apple-text-mut);
+            font-weight: 600;
+            background: rgba(245, 245, 247, 0.5);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        tr:last-child td { border-bottom: none; }
+        
+        tbody tr {
+            transition: background-color 0.2s;
+            cursor: pointer;
+        }
+        tbody tr:hover {
+            background-color: #F9F9FB;
+        }
+
+        .device-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--apple-text-main);
+            margin-bottom: 4px;
+        }
+        .device-sub {
+            font-size: 12px;
+            color: var(--apple-text-mut);
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .badge-hw { background: rgba(0,122,255,0.1); color: var(--apple-blue); }
+        .badge-vcpe { background: rgba(175,82,222,0.1); color: var(--apple-purple); }
+        .badge-online { background: rgba(52,199,89,0.1); color: var(--apple-green); }
+        .badge-offline { background: rgba(134,134,139,0.1); color: var(--apple-text-mut); }
+
+        /* ================= 详情视图样式 ================= */
+        .detail-view {
+            display: none; /* 默认隐藏 */
+            width: 100%;
+            height: 100%;
+        }
+
+        .sidebar {
+            width: 360px;
+            background-color: var(--apple-card);
+            border-right: 1px solid var(--apple-border);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            z-index: 10;
+            box-shadow: 2px 0 12px rgba(0,0,0,0.02);
+        }
+
+        .sidebar-header { padding: 24px 32px 16px; }
+
+        .back-link {
+            color: var(--apple-text-mut);
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 24px;
+            transition: color 0.2s;
+            cursor: pointer;
+            padding: 8px 12px 8px 0;
+        }
+        .back-link:hover { color: var(--apple-text-main); }
+
+        .device-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .device-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 16px;
+            margin-bottom: 32px;
+        }
+        .info-item { display: flex; flex-direction: column; gap: 6px; }
+        .info-label { font-size: 12px; color: var(--apple-text-mut); font-weight: 500; }
+        .info-value { font-size: 14px; font-weight: 500; word-break: break-all; line-height: 1.3; }
+        .info-value.blue { color: var(--apple-blue); }
+
+        .actions { display: flex; gap: 12px; margin-bottom: 32px; }
+        .btn {
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .btn:active { transform: scale(0.98); }
+        .btn-primary { background-color: var(--apple-blue); color: white; flex: 2; }
+        .btn-primary:hover { background-color: #006ee6; }
+        .btn-outline { background-color: transparent; color: var(--apple-blue); border: 1px solid var(--apple-blue); flex: 2; }
+        .btn-outline:hover { background-color: rgba(0,122,255,0.05); }
+        .btn-icon { background-color: transparent; border: 1px solid var(--apple-border); color: var(--apple-text-main); flex: 1; display: flex; align-items: center; justify-content: center; }
+        .btn-icon:hover { background-color: var(--apple-bg); }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 0 40px;
+            overflow-y: auto;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 32px;
+            border-bottom: 1px solid var(--apple-border);
+            padding-top: 32px;
+            margin-bottom: 32px;
+            position: sticky;
+            top: 0;
+            background: var(--apple-bg);
+            z-index: 10;
+        }
+        .tab {
+            padding: 12px 0;
+            font-size: 15px;
+            color: var(--apple-text-mut);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: all 0.2s;
+        }
+        .tab:hover { color: var(--apple-text-main); }
+        .tab.active {
+            color: var(--apple-text-main);
+            border-bottom-color: var(--apple-text-main);
+            font-weight: 600;
+        }
+
+        .row { display: flex; gap: 24px; margin-bottom: 24px; }
+        .col-2 { flex: 2; min-width: 0; }
+        .col-1 { flex: 1; min-width: 0; }
+        
+        .card {
+            background: var(--apple-card);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--apple-shadow);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .card-title { font-size: 17px; font-weight: 600; margin: 0; letter-spacing: -0.3px; }
+
+        /* 硬件端口视图 */
+        .ports-container { display: flex; gap: 20px; align-items: center; justify-content: center; padding: 24px 0; }
+        .port-box { width: 72px; height: 72px; border: 2px solid var(--apple-border); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; background: var(--apple-card); }
+        .port-box.active { border-color: var(--apple-green); background: rgba(52, 199, 89, 0.02); }
+        .port-box.inactive { background: var(--apple-bg); color: var(--apple-text-mut); }
+        .port-label { font-size: 11px; margin-top: 6px; font-weight: 500; }
+        .port-connection { position: absolute; bottom: -32px; font-size: 11px; font-weight: 600; background: var(--apple-card); padding: 4px 10px; border-radius: 12px; border: 1px solid var(--apple-border); box-shadow: 0 2px 6px rgba(0,0,0,0.05); white-space: nowrap; }
+
+        /* vCPE 拓扑视图 */
+        .vcpe-topology { display: none; flex-direction: row; align-items: center; justify-content: space-between; padding: 20px; background: var(--apple-bg); border-radius: 12px; margin-bottom: 12px; }
+        .topo-node { display: flex; flex-direction: column; align-items: center; gap: 8px; background: var(--apple-card); padding: 16px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); z-index: 2; text-align: center; border: 1px solid var(--apple-border); min-width: 100px; }
+        .topo-node.highlight { border-color: var(--apple-blue); box-shadow: 0 4px 16px rgba(0,122,255,0.12); }
+        .topo-icon { font-size: 28px; }
+        .topo-label { font-size: 13px; font-weight: 600; }
+        .topo-sub { font-size: 11px; color: var(--apple-text-mut); }
+        .topo-line { flex: 1; height: 2px; background: var(--apple-border); position: relative; z-index: 1; margin: 0 -16px; }
+        .topo-line::after { content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; border-radius: 50%; background: var(--apple-green); box-shadow: 0 0 0 4px rgba(52,199,89,0.15); }
+
+        .view-desc { text-align: center; font-size: 12px; color: var(--apple-text-mut); margin-top: 24px; }
+
+        /* 状态进度条 */
+        .status-list { display: flex; flex-direction: column; gap: 20px; }
+        .status-row { display: flex; flex-direction: column; gap: 8px; }
+        .status-labels { display: flex; justify-content: space-between; font-size: 13px; }
+        .status-labels .icon { margin-right: 6px; font-size: 14px; }
+        .status-labels .value { color: var(--apple-text-mut); font-weight: 500; }
+        .progress-track { height: 6px; background: var(--apple-bg); border-radius: 3px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 3px; }
+
+        /* 工具类 */
+        .hide { display: none !important; }
+    </style>
+</head>
+<body>
+
+<!-- ================= 视图 1：设备列表 ================= -->
+<div id="view-list" class="list-view">
+    <div class="list-header">
+        <div>
+            <h1 class="list-title">边缘节点管理</h1>
+            <div class="list-subtitle">统一管理物理 CPE 与 Docker vCPE 实例</div>
+        </div>
+        <div class="list-actions">
+            <div class="filter-tabs">
+                <div class="filter-tab active">全部节点</div>
+                <div class="filter-tab">硬件 CPE</div>
+                <div class="filter-tab">虚拟 vCPE</div>
+            </div>
+            <input type="text" placeholder="搜索设备 S/N, IP 或企业..." class="search-input">
+            <button class="btn btn-primary" style="padding: 12px 20px;">+ 部署新节点</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>设备标识 / 识别码</th>
+                    <th>节点类型</th>
+                    <th>网络状态</th>
+                    <th>公网 IP / 接入点</th>
+                    <th>所属企业 / 部门</th>
+                    <th>最后激活时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 硬件 CPE 行 -->
+                <tr onclick="openDetail('B0677', 'hw', '广州智联跨境电商有限公司', '116.22.132.158')">
+                    <td>
+                        <div class="device-name">B0677</div>
+                        <div class="device-sub">SN: BK4L-N2851 (MAC: 60:be:b4:2b:92:f6)</div>
+                    </td>
+                    <td><span class="badge badge-hw">硬件 CPE</span></td>
+                    <td><span class="badge badge-online">🟢 在线</span></td>
+                    <td>116.22.132.158</td>
+                    <td>广州智联跨境电商有限公司</td>
+                    <td>2026-03-09 11:49:33</td>
+                </tr>
+                <!-- 虚拟 vCPE 行 -->
+                <tr onclick="openDetail('V-Node-HK', 'vcpe', '香港分公司 (核心机房)', '47.23.11.90')">
+                    <td>
+                        <div class="device-name">V-Node-HK</div>
+                        <div class="device-sub">Container ID: a7f8e9d0c1b2</div>
+                    </td>
+                    <td><span class="badge badge-vcpe">Docker vCPE</span></td>
+                    <td><span class="badge badge-online">🟢 在线</span></td>
+                    <td>47.23.11.90</td>
+                    <td>香港分公司 (核心机房)</td>
+                    <td>2026-03-09 10:15:00</td>
+                </tr>
+                <!-- 离线设备行 -->
+                <tr onclick="openDetail('C0992', 'hw', '深圳研发中心', '203.11.2.55')">
+                    <td>
+                        <div class="device-name">C0992</div>
+                        <div class="device-sub">SN: AR2L-X1099 (MAC: 12:ab:34:cd:56:ef)</div>
+                    </td>
+                    <td><span class="badge badge-hw">硬件 CPE</span></td>
+                    <td><span class="badge badge-offline">⚪ 离线</span></td>
+                    <td>203.11.2.55</td>
+                    <td>深圳研发中心</td>
+                    <td>2026-03-08 18:20:11</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ================= 视图 2：设备详情 ================= -->
+<div id="view-detail" class="detail-view">
+    <!-- 侧边栏：设备基础信息 -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <a onclick="closeDetail()" class="back-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                返回节点列表
+            </a>
+            
+            <div class="device-title-row">
+                <h1 class="device-title" id="detail-title">B0677</h1>
+                <span class="badge badge-online" style="font-size: 13px;">🟢 在线</span>
+            </div>
+
+            <!-- 产品逻辑：用于标示当前详情页对应的设备类型，不再提供手动切换 -->
+            <div style="margin-bottom: 24px;">
+                <span id="detail-badge-type" class="badge badge-hw" style="font-size: 13px; padding: 6px 12px;">硬件 CPE</span>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label" id="lbl-model">设备型号 (Model)</span>
+                    <span class="info-value" id="val-model">BK4L-N2851</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label" id="lbl-mac">物理地址 (MAC)</span>
+                    <span class="info-value" id="val-mac">60:be:b4:2b:92:f6</span>
+                </div>
+                <div class="info-item" style="grid-column: span 2;">
+                    <span class="info-label">所属企业</span>
+                    <span class="info-value" id="val-company">广州智联跨境电商有限公司</span>
+                </div>
+                <div class="info-item" style="grid-column: span 2;">
+                    <span class="info-label">公网接入点</span>
+                    <span class="info-value blue" id="val-ip">116.22.132.158</span>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-primary">同步策略下发</button>
+                <button class="btn btn-outline">重启节点</button>
+            </div>
+
+            <div class="info-grid" style="border-top: 1px solid var(--apple-border); padding-top: 24px;">
+                <div class="info-item">
+                    <span class="info-label">智能调度 DNS</span>
+                    <span class="info-value">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">隧道带宽限速</span>
+                    <span class="info-value">100 Mbps</span>
+                </div>
+                
+                <!-- vCPE 专属信息：基于低门槛部署的宿主机内核信息 -->
+                <div class="info-item hide" id="host-env" style="grid-column: span 2; background: var(--apple-bg); padding: 12px; border-radius: 8px;">
+                    <span class="info-label" style="color: var(--apple-text-main); font-weight: 600; margin-bottom: 2px;">宿主机内核 (Host Kernel)</span>
+                    <span class="info-value" style="color: var(--apple-text-mut); font-size: 12px;">Linux 5.15.0-76-generic (x86_64)</span>
+                    <div style="font-size: 11px; color: var(--apple-text-mut); margin-top: 6px; line-height: 1.4;">
+                        提示：为保证容器一键化部署体验，当前节点未挂载系统目录，仅采集基础内核特征。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主体内容区：监控与数据分析 -->
+    <div class="main-content">
+        <div class="tabs">
+            <div class="tab active">网络概览</div>
+            <div class="tab">详细统计</div>
+            <div class="tab">流量明细</div>
+            <div class="tab">策略配置</div>
+        </div>
+
+        <div class="row">
+            <!-- 核心区块：连接拓扑 -->
+            <div class="card col-2">
+                <div class="card-header">
+                    <h2 class="card-title" id="title-ports">物理端口连接状态</h2>
+                    <span style="font-size: 13px; color: var(--apple-blue); cursor: pointer; font-weight: 500;">刷新拓扑</span>
+                </div>
+                
+                <!-- 硬件 CPE 视图 -->
+                <div class="ports-container" id="view-ports-hw">
+                    <div class="port-box active">
+                        <span style="font-size: 24px;">🌐</span>
+                        <span class="port-label">eth0</span>
+                        <div class="port-connection">WAN 1</div>
+                    </div>
+                    <div class="port-box active">
+                        <span style="font-size: 24px;">💻</span>
+                        <span class="port-label">eth1</span>
+                        <div class="port-connection" style="border-color: var(--apple-blue); color: var(--apple-blue);">隧道 LA</div>
+                    </div>
+                    <div class="port-box active">
+                        <span style="font-size: 24px;">💻</span>
+                        <span class="port-label">eth2</span>
+                        <div class="port-connection" style="border-color: var(--apple-purple); color: var(--apple-purple);">隧道 EN</div>
+                    </div>
+                </div>
+
+                <!-- vCPE (Docker) 逻辑视图 -->
+                <div class="vcpe-topology" id="view-ports-vcpe">
+                    <div class="topo-node">
+                        <div class="topo-icon">🖥️</div>
+                        <div class="topo-label">客户宿主机网络</div>
+                        <div class="topo-sub">Host Network / NAT</div>
+                    </div>
+                    <div class="topo-line"></div>
+                    <div class="topo-node highlight">
+                        <div class="topo-icon">🐳</div>
+                        <div class="topo-label">vCPE 容器实例</div>
+                        <div class="topo-sub">sdwan-edge:latest</div>
+                    </div>
+                    <div class="topo-line"></div>
+                    <div class="topo-node">
+                        <div class="topo-icon">☁️</div>
+                        <div class="topo-label">SD-WAN 云网络</div>
+                        <div class="topo-sub">虚拟网卡: tun0 (LA)</div>
+                    </div>
+                </div>
+                
+                <div class="view-desc" id="desc-ports">
+                    反映物理路由器的网口插线状态及隧道绑定情况
+                </div>
+            </div>
+
+            <!-- 核心区块：实时计算资源 -->
+            <div class="card col-1">
+                <h2 class="card-title" style="margin-bottom: 24px;">实时负载状态</h2>
+                <div class="status-list">
+                    <div class="status-row">
+                        <div class="status-labels">
+                            <span><span class="icon">⚙️</span> CPU 负载</span>
+                            <span class="value">21.25%</span>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 21%; background: var(--apple-green);"></div></div>
+                    </div>
+                    <div class="status-row">
+                        <div class="status-labels">
+                            <span><span class="icon">🧠</span> 内存占用</span>
+                            <span class="value" id="val-mem">191.7 MB / 1.98 GB</span>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 10%; background: var(--apple-green);"></div></div>
+                    </div>
+                    
+                    <!-- 硬件独占数据 -->
+                    <div class="status-row" id="row-temp">
+                        <div class="status-labels">
+                            <span><span class="icon">🌡️</span> 主板温度</span>
+                            <span class="value">45°C</span>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 45%; background: var(--apple-orange);"></div></div>
+                    </div>
+                    
+                    <!-- vCPE 独占数据 -->
+                    <div class="status-row hide" id="row-uptime">
+                        <div class="status-labels">
+                            <span><span class="icon">⏱️</span> 容器存活时长</span>
+                            <span class="value" style="color: var(--apple-text-main);">14天 06小时</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 下方可无限扩展其他图表区块 -->
+        <div class="card">
+            <div class="card-header"><h2 class="card-title">网络吞吐趋势</h2></div>
+            <div style="height: 120px; background: repeating-linear-gradient(0deg, transparent, transparent 19px, var(--apple-border) 20px); display: flex; align-items: flex-end; justify-content: space-around; padding-top: 20px; opacity: 0.5;">
+                <div style="width: 20px; height: 30%; background: var(--apple-blue); border-radius: 4px 4px 0 0;"></div>
+                <div style="width: 20px; height: 50%; background: var(--apple-blue); border-radius: 4px 4px 0 0;"></div>
+                <div style="width: 20px; height: 80%; background: var(--apple-blue); border-radius: 4px 4px 0 0;"></div>
+                <div style="width: 20px; height: 60%; background: var(--apple-blue); border-radius: 4px 4px 0 0;"></div>
+                <div style="width: 20px; height: 90%; background: var(--apple-blue); border-radius: 4px 4px 0 0;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 视图切换逻辑
+    const viewList = document.getElementById('view-list');
+    const viewDetail = document.getElementById('view-detail');
+
+    // 打开详情页
+    function openDetail(deviceId, type, company, ip) {
+        // 1. 切换视图
+        viewList.style.display = 'none';
+        viewDetail.style.display = 'flex';
+
+        // 2. 填充通用基础数据
+        document.getElementById('detail-title').innerText = deviceId;
+        document.getElementById('val-company').innerText = company;
+        document.getElementById('val-ip').innerText = ip;
+
+        // 3. 根据类型调整呈现逻辑（产品体验核心）
+        const isVcpe = type === 'vcpe';
+        
+        // 类型 Badge
+        const badgeType = document.getElementById('detail-badge-type');
+        badgeType.className = isVcpe ? 'badge badge-vcpe' : 'badge badge-hw';
+        badgeType.innerText = isVcpe ? 'Docker vCPE' : '硬件 CPE';
+
+        // 字段语义转换
+        document.getElementById('lbl-model').innerText = isVcpe ? '容器镜像 (Image)' : '设备型号 (Model)';
+        document.getElementById('val-model').innerText = isVcpe ? 'sdwan-edge:v2.1' : (deviceId === 'B0677' ? 'BK4L-N2851' : 'AR2L-X1099');
+        
+        document.getElementById('lbl-mac').innerText = isVcpe ? '容器标识 (Container ID)' : '物理地址 (MAC)';
+        document.getElementById('val-mac').innerText = isVcpe ? 'a7f8e9d0c1b2' : '60:be:b4:2b:92:f6';
+
+        // 内存显示差异（容器通常受限于 cgroup 分配，显示配额）
+        document.getElementById('val-mem').innerText = isVcpe ? '128 MB / 512 MB (Limit)' : '191.7 MB / 1.98 GB';
+
+        // 宿主机内核信息展示 (针对 vCPE 的现实妥协)
+        const hostEnv = document.getElementById('host-env');
+        if (isVcpe) {
+            hostEnv.classList.remove('hide');
+        } else {
+            hostEnv.classList.add('hide');
+        }
+
+        // 网络拓扑与状态差异
+        document.getElementById('title-ports').innerText = isVcpe ? '虚拟网络映射拓扑' : '物理端口连接状态';
+        document.getElementById('view-ports-hw').style.display = isVcpe ? 'none' : 'flex';
+        document.getElementById('view-ports-vcpe').style.display = isVcpe ? 'flex' : 'none';
+        document.getElementById('desc-ports').innerText = isVcpe 
+            ? '展示 vCPE 容器如何通过宿主机网络 NAT 穿透并建立 SD-WAN 隧道' 
+            : '反映物理路由器的网口插线状态及隧道绑定情况';
+
+        if (isVcpe) {
+            document.getElementById('row-temp').classList.add('hide');
+            document.getElementById('row-uptime').classList.remove('hide');
+        } else {
+            document.getElementById('row-temp').classList.remove('hide');
+            document.getElementById('row-uptime').classList.add('hide');
+        }
+    }
+
+    // 关闭详情页，返回列表
+    function closeDetail() {
+        viewDetail.style.display = 'none';
+        viewList.style.display = 'flex';
+    }
+</script>
+
+</body>
+</html>
